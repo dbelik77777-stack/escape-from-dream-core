@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to dreamCore</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="jumpscare-overlay" id="jumpscareOverlay">
+    <img id="monsterImage" src="img/monster1.png" alt="Monster 1">
+    <img id="monster2Image" src="img/monster2.jpg" alt="Monster 2">
+    <img id="monster3Image" src="img/monster3.png" alt="Monster 3">
+    <img id="respawnClockOverlay" src="img/timeRespawn.png" alt="">
+</div>
+
+<div id="respawnAnimation">
+    <img src="img/respawnAnimation.png" alt="">
+</div>
+
+<!-- АНИМАЦИЯ ЭЛЕКТРОШОКЕРА -->
+<div id="shockerAnimation" class="shocker-anim-container">
+    <div class="shocker-lightning-layer"></div>
+</div>
+
+<div class="eyelids-overlay" id="eyelidsOverlay">
+    <div class="eyelid top-eyelid"></div>
+    <div class="eyelid bottom-eyelid"></div>
+</div>
+
+<div class="startButton">
+    <button class="sleeping">sleep</button>
+    <button id="achievementsOpen" class="achievements-open">АЧИВКИ</button>
+    <button id="shopOpenBtn" class="shop-open-btn">МАГАЗИН</button>
+    <button class="savesOpenBtn" id="savesOpenBtn" type="button">🌿 SAVES</button>
+    <button id="secretMenuBtn" style="background: transparent; border: 1px dashed rgba(255,255,255,0.4); color: white; padding: 10px 15px; border-radius: 8px; cursor: pointer; font-family: inherit;">Секрет</button>
+</div>
+
+<div id="achievementsScreen" class="achievements-screen">
+    <div class="achievements-panel">
+        <div class="achievements-header">
+            <div>
+                <h1>ACHIEVEMENTS</h1>
+                <p>Твои достижения в dreamCore</p>
+            </div>
+            <button id="achievementsResetOpen" class="achievements-reset-btn">СБРОСИТЬ</button>
+            <button id="achievementsClose" class="achievements-close">×</button>
+        </div>
+
+        <div id="achievementsProgress" class="achievements-progress"></div>
+
+        <div class="achievements-content">
+            <div id="achievementsList" class="achievements-list"></div>
+            <div id="achievementDetails" class="achievement-details">
+                <h2>Выбери достижение</h2>
+                <p>Нажми на любую карточку, чтобы узнать, как её получить.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="achievementToast" class="achievement-toast">
+    <div class="toast-icon">★</div>
+    <div>
+        <div class="toast-label">ДОСТИЖЕНИЕ ПОЛУЧЕНО</div>
+        <div id="achievementToastName" class="toast-name"></div>
+    </div>
+</div>
+
+<div class="lol">
+    <div class="screen-overlay" id="overlay">
+        <button class="wakeupButton" id="white-flash-btn">wake up</button>
+    </div>
+</div>
+
+<!-- ЭКРАН СМЕРТИ (You died) -->
+<div class="deathScreenContainer" id="deathScreenContainer">
+    <div class="DeathScreenBox">
+        <h1 class="disagne">You died</h1>
+        <button class="moda" id="menuButton">Menu</button>
+    </div>
+</div>
+
+<div class="container">
+    <img class="hands" src="img/hands.png" alt="">
+
+    <!-- ПРОГРЕСС-БАРЫ -->
+     <div class="HP">
+        <img class="heart" src="img/heart.png" alt="">
+        <div class="bar-container">
+            <div class="bar-fill" id="hpFill"></div>
+            <div class="bar-text" id="hpText">100</div>
+        </div>
+     </div>
+
+     <div class="HUNGER">
+        <img class="burger" src="img/burger.png" alt="">
+        <div class="bar-container">
+            <div class="bar-fill" id="hungerFill"></div>
+            <div class="bar-text" id="hungerText">100</div>
+        </div>
+     </div>
+
+     <div class="ENERGY">
+        <img class="energy" src="img/energy.png" alt="">
+        <div class="bar-container">
+            <div class="bar-fill" id="energyFill"></div>
+            <div class="bar-text" id="energyText">100</div>
+        </div>
+     </div>
+
+     <!-- СЧЁТЧИК КМ -->
+    <div class="KM-counter-container">
+        <img class="km-icon" src="img/coin.png" alt="КМ">
+        <span id="kmCount">0</span> КМ
+        <span id="kmPopup" class="km-popup">+1</span>
+    </div>
+
+     <div class="MAP">
+        <img class="map" src="img/map.png" alt="">
+     </div>
+
+     <div class="INVENTORY">
+        <img class="backpack" src="img/backpack.png" alt="">
+     </div>
+
+     <img class="right walking" src="img/goRight.png" alt="">
+     <img class="up walking" src="img/goUp.png" alt="">
+     <img class="left walking" src="img/goLeft.png" alt="">
+
+<div class="MAP2">
+    <img class="mapHotBar" id="mapImageElem" src="img/mapHotBar.png" alt="Карта">
+    <button class="closeMap">X</button>
+    <button class="mapArrowLeft" id="mapPrevBtn">‹</button>
+    <button class="mapArrowRight" id="mapNextBtn">›</button>
+</div>
+
+
+<div class="bruh">
+    <div class="UseThis">
+        <h1 class="disagne">You want use this?</h1>
+        <div class="boxBut">
+            <button class="buttonsYesNo1 moda">yes</button>
+            <button class="buttonsYesNo2 moda">no</button>
+        </div>
+    </div>
+</div>
+
+<div class="eyesCLOSE">
+    <img class="eyeIMG" src="img/eyeOpen.png" alt="">
+</div>
+
+<button class="phoneOpenBtn" id="phoneOpenBtn" title="Телефон">
+    <img src="img/phoneIcon.png" alt="Телефон">
+</button>
+
+<!-- ОКНО АДМИН-ПАНЕЛИ -->
+<div id="adminScreen" class="admin-screen">
+    <div class="admin-panel">
+        <div class="admin-header">
+            <h2>⚙️ АДМИН-ПАНЕЛЬ</h2>
+            <button id="adminCloseBtn" class="admin-close-btn">×</button>
+        </div>
+
+        <div class="admin-section-title">📦 СПАВН ПРЕДМЕТОВ</div>
+        <div class="admin-grid">
+            <button class="admin-btn" data-action="spawnWater">💧 Вода</button>
+            <button class="admin-btn" data-action="spawnEnergy">⚡ Энергетик</button>
+            <button class="admin-btn" data-action="spawnBandage">🩹 Бинт</button>
+            <button class="admin-btn" data-action="spawnClock">⏰ Часы респавна</button>
+        </div>
+
+        <div class="admin-section-title">👾 ПРИЗЫВ МОНСТРОВ</div>
+        <div class="admin-grid">
+            <button class="admin-btn monster" data-action="spawnMonster1">Кайлесен</button>
+            <button class="admin-btn monster" data-action="spawnMonster2">Фурри-фембой</button>
+            <button class="admin-btn monster" data-action="spawnMonster3">Клокстопер</button>
+            <button class="admin-btn monster" data-action="spawnMonster4">А-090</button>
+        </div>
+
+        <div class="admin-section-title">⚡ БЕССМЕРТИЕ И РЕСУРСЫ</div>
+        <div class="admin-grid">
+            <button class="admin-btn god" id="adminGodModeBtn">Бессмертие: ВЫКЛ</button>
+            <button class="admin-btn" data-action="fullHeal">💚 Восстановить всё</button>
+        </div>
+    </div>
+</div>
+
+<div class="portalGUN">
+    <img class="PORTALGUN" src="img/portalGun.png" alt="">
+    <img class="portal" src="img/portal.png" alt="">
+</div>
+
+<div class="portalGunHotBar">
+    <img class="portalGunInterface" src="img/portalGunHotBar.png" alt="">
+    <button class="closeGun">X</button>
+<div class="portalLevelSelector">
+    <button type="button" class="portalArrowBtn" id="portalPrevLevel">‹</button>
+    <span id="portalLevelText">Level 1</span>
+    <button type="button" class="portalArrowBtn" id="portalNextLevel">›</button>
+</div>
+    <button class="portalLaunchButton" type="button"></button>
+</div>
+
+<div class="imgTimeClaim">
+    <img class="imgTime" src="img/timeRespawn.png" alt="">
+</div>
+
+<div class="waterUSING">
+    <img class="WATER" src="img/water.png" alt="">
+</div>
+
+<div class="energyDrinkUSING">
+    <img class="ENERGYDRINK" src="img/energyDrink.png" alt="">
+</div>
+
+<div class="bandageUSING">
+    <img class="BANDAGE" src="img/bandage.png" alt="">
+</div>
+
+<div class="doorSpawn">
+    <img class="doorIMG" src="img/door.webp" alt="">
+</div>
+
+<button id="adminOpenBtn" class="admin-open-btn">👑 АДМИН</button>
+</div>
+
+<!-- АУДИО -->
+<audio id="rainAudio" src="audio/rain.mp3" loop autoplay></audio>
+<audio id="sleepClickAudio" src="audio/BTNsleep.mp3"></audio>
+<audio id="level1Music" src="audio/level1.mp3" loop></audio>
+<audio id="level2Music" src="audio/level2.mp3" loop></audio>
+<audio id="level3Music" src="audio/level3Music.mp3" loop></audio>
+<audio id="level4Music" src="audio/level4Music.mp3" loop></audio>
+<audio id="level5Music" src="audio/level5Music.mp3" loop></audio>
+<audio id="level7Music" src="audio/level7Music.mp3" loop></audio>
+<audio id="level8Music" src="audio/level8Music.mp3" loop></audio>
+<audio id="level9Music" src="audio/level9Music.mp3" loop></audio>
+<audio id="inventoryOpenAudio" src="audio/openInventory.mp3"></audio>
+<audio id="portalSpawnAudio" src="audio/portalOpen.mp3"></audio>
+<audio id="waterPickupAudio" src="audio/claimWater.mp3"></audio>
+<audio id="waterUseAudio" src="audio/useWater.mp3"></audio>
+<audio id="bandageUseAudio" src="audio/useBandage.mp3"></audio>
+<audio id="monster1Audio" src="audio/monster1.mp3"></audio>
+<audio id="monster2Audio" src="audio/monster2.mp3"></audio>
+<audio id="monster2DamageAudio" src="audio/monster2Damage.mp3"></audio>
+<audio id="monster3Audio" src="audio/monster3.mp3"></audio>
+<audio id="monster4WarningAudio" src="audio/warning.mp3" preload="auto"></audio>
+<audio id="monster4ScreamAudio" src="audio/monster4.mp3" preload="auto"></audio>
+<audio id="deathMusic" src="audio/afterDied.mp3"></audio>
+<audio id="respawnClockAudio" src="audio/claimTime.mp3"></audio>
+<audio id="respawnSinkAudio" src="audio/timeAnimation.mp3"></audio>
+<audio id="equipItemAudio" src="audio/BTNsleep.mp3" preload="auto"></audio>
+<audio id="pageTurnAudio" src="audio/pageTurn.mp3"></audio>
+<audio id="shopOpenAudio" src="audio/shop.mp3"></audio>
+<audio id="shopBuyAudio" src="audio/buy.mp3"></audio>
+<audio id="shockerSound" src="audio/energyTrap.mp3"></audio>
+<audio id="bossPhase2Music" src="audio/boss_phase2.mp3" preload="auto" loop></audio>
+
+<!-- МОДАЛЬНОЕ ОКНО ПОДТВЕРЖДЕНИЯ СБРОСА -->
+<div id="resetConfirmModal" class="achievement-confirm-screen">
+    <div class="achievement-confirm-box">
+        <h2>СБРОС ДОСТИЖЕНИЙ</h2>
+        <p>Ты действительно хочешь удалить все достижения и начать сбор заново?</p>
+        <div class="achievement-confirm-buttons">
+            <button id="resetConfirmYes" class="confirm-btn yes">ДА</button>
+            <button id="resetConfirmNo" class="confirm-btn no">НЕТ</button>
+        </div>
+    </div>
+</div>
+
+<!-- ОКНО МАГАЗИНА -->
+<div id="shopScreen" class="shop-screen">
+    <div class="shop-window">
+        <div class="win10-titlebar">
+            <div class="win10-title">🛒 Магазин DreamCore — Баланс: <span id="shopKmBalance">0</span> КМ</div>
+            <div class="win10-controls">
+                <button id="shopResetOpenBtn" class="shop-reset-btn">СБРОСИТЬ</button>
+                <button id="shopCloseBtn" class="win10-close">✕</button>
+            </div>
+        </div>
+        <div class="shop-content">
+            <div class="shop-grid">
+                <div class="shop-card" data-item="shocker" data-price="200">
+                    <img src="img/shocker.png" alt="Шокер">
+                    <h3>Электрошокер</h3>
+                    <p class="price">200 КМ</p>
+                    <button class="buy-btn">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="glasses" data-price="220">
+                    <img src="img/glasses.png" alt="Очки">
+                    <h3>Солнечные очки</h3>
+                    <p class="price">220 КМ</p>
+                    <button class="buy-btn">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="brokenTimer" data-price="250">
+                    <img src="img/brokenTimer.png" alt="Таймер">
+                    <h3>Сломанный таймер</h3>
+                    <p class="price">250 КМ</p>
+                    <button class="buy-btn">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="startClock" data-price="500">
+                    <img src="img/timeRespawn.png" alt="Часы">
+                    <h3>Часы респавна</h3>
+                    <p class="price">500 КМ</p>
+                    <button class="buy-btn">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="portalGun" data-price="1000">
+                    <img src="img/portalGun.png" alt="Пушка">
+                    <h3>Портальная пушка</h3>
+                    <p class="price">1000 КМ</p>
+                    <button class="buy-btn">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="lotus" data-price="100">
+                    <img src="img/lotus_shop.png" alt="Лотус">
+                    <h3>Цветок Лотус</h3>
+                    <div class="price">100 КМ</div>
+                    <button class="buy-btn" type="button">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="antivirusPro" data-price="300">
+                    <img src="img/antivirus_pro.png" alt="Antivirus Pro+">
+                    <h3>Antivirus Pro+</h3>
+                    <div class="price">300 КМ</div>
+                    <button class="buy-btn" type="button">КУПИТЬ</button>
+                </div>
+                <div class="shop-card" data-item="holyCross" data-price="350">
+                    <img src="img/cross.png" alt="Крест">
+                    <h3>Крест</h3>
+                    <div class="price">350 КМ</div>
+                    <button class="buy-btn" type="button">КУПИТЬ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="shopDescModal" class="shop-desc-modal">
+    <div class="shop-desc-box">
+        <h3 id="descTitle">Название товара</h3>
+        <p id="descText">Описание...</p>
+        <button id="descCloseBtn" class="desc-close-btn">ЗАКРЫТЬ</button>
+    </div>
+</div>
+
+<div id="shopResetConfirmModal" class="achievement-confirm-screen">
+    <div class="achievement-confirm-box">
+        <h2>СБРОС ПОКУПОК</h2>
+        <p>Вы действительно хотите сбросить все купленные предметы и вернуть КМ?</p>
+        <div class="achievement-confirm-buttons">
+            <button id="shopResetYes" class="confirm-btn yes">ДА</button>
+            <button id="shopResetNo" class="confirm-btn no">НЕТ</button>
+        </div>
+    </div>
+</div>
+
+<!-- ТЕЛЕФОН -->
+<div id="phoneDarkOverlay"></div>
+<div id="phoneInterface">
+    <div class="phoneTop">
+        <span class="phoneLogo">DREAM<span>PHONE</span></span>
+        <button id="phoneCloseBtn" title="Закрыть телефон">✕</button>
+    </div>
+    <div class="phoneContent">
+        <div id="phoneAppLibrary" class="phone-app-library">
+            <h2 class="phone-library-title">БИБЛИОТЕКА</h2>
+            <p class="phone-library-subtitle">ВЫБЕРИ ПРИЛОЖЕНИЕ</p>
+            <div class="phone-app-grid">
+                <button id="openMinerApp" class="phone-app-card" type="button">
+                    <span class="phone-app-icon miner-app-icon">₭</span>
+                    <span class="phone-app-name">KM MINER</span>
+                    <span class="phone-app-description">Добыча КМ</span>
+                </button>
+                <button id="openCodeHackApp" class="phone-app-card" type="button">
+                    <span class="phone-app-icon hack-app-icon">&gt;_</span>
+                    <span class="phone-app-name">ВЗЛОМ КОДА</span>
+                    <span class="phone-app-description">Системный терминал</span>
+                </button>
+            </div>
+            <div class="phoneFooter">DREAMCORE SYSTEM // ONLINE</div>
+        </div>
+
+        <div id="phoneMinerApp" class="phone-app-screen" style="display:none;">
+            <button class="phoneBackBtn" id="phoneBackFromMiner" type="button">← БИБЛИОТЕКА</button>
+            <div class="minerIcon">₭</div>
+            <h2>KM MINER</h2>
+            <p class="minerSubtitle">АВТОМАТИЧЕСКАЯ ДОБЫЧА</p>
+            <div class="minerBalance">
+                <span>ТВОЙ БАЛАНС</span>
+                <strong><span id="phoneKmBalance">0</span> KM</strong>
+            </div>
+            <div class="minerTimerBox">
+                <span>СЛЕДУЮЩАЯ ДОБЫЧА</span>
+                <div class="minerTimer">
+                    <span id="phoneMinerTimer">5</span><small> сек.</small>
+                </div>
+                <div class="minerProgress">
+                    <div id="phoneMinerProgress"></div>
+                </div>
+                <p>+1 KM ЗА ЦИКЛ</p>
+            </div>
+            <div class="phoneUpgradeInfo">
+                <span>УРОВЕНЬ МАЙНЕРА</span>
+                <strong id="phoneMinerLevel">0 / 4</strong>
+            </div>
+            <button id="phoneUpgradeBtn" class="phoneNeonBtn">ПРОКАЧАТЬ МАЙНЕР</button>
+            <img id="monster4WarningImage" class="monster4-warning" src="img/monster4_alert.webp" alt="Предупреждение">
+            <button id="phoneAntivirusBtn" class="phoneNeonBtn antivirusBtn">АНТИВИРУС</button>
+            <button id="phoneMinerResetBtn" class="phoneMinerResetBtn">↻ СБРОСИТЬ УРОВЕНЬ МАЙНЕРА</button>
+            <div class="phoneFooter">DREAMCORE SYSTEM // ONLINE</div>
+        </div>
+
+        <div id="phoneCodeHackApp" class="phone-app-screen code-hack-app" style="display:none;">
+            <button class="phoneBackBtn" id="phoneBackFromHack" type="button">← БИБЛИОТЕКА</button>
+            <div class="hackAppIcon">&gt;_</div>
+            <h2>CODE BREAKER</h2>
+            <p class="hackSubtitle">DREAMCORE SYSTEM TERMINAL</p>
+            <div class="hackStatus" id="hackStatus">SYSTEM STATUS: STANDBY</div>
+            <button id="phoneHackCodeBtn" class="hackCodeBtn" type="button">ВЗЛОМАТЬ КОД</button>
+            <p class="hackHint">ЗАПУСТИ СИСТЕМНЫЙ ВЗЛОМ, ЧТОБЫ УСТРАНИТЬ ГЛЮКИ</p>
+            <div class="phoneFooter">DREAMCORE SYSTEM // TERMINAL</div>
+        </div>
+    </div>
+</div>
+
+<div id="phoneMinerResetModal" class="achievement-confirm-screen">
+    <div class="achievement-confirm-box">
+        <h2>СБРОС МАЙНЕРА</h2>
+        <p>Сбросить уровень майнера и вернуть все потраченные на прокачку КМ?</p>
+        <div class="achievement-confirm-buttons">
+            <button id="phoneMinerResetYes" class="confirm-btn yes">ДА</button>
+            <button id="phoneMinerResetNo" class="confirm-btn no">НЕТ</button>
+        </div>
+    </div>
+</div>
+
+<div id="monster4Jumpscare">
+    <img src="img/monster4.webp" id="monster4ScreamImage" alt="Монстр 4">
+    <img src="img/timeRespawnMonster4.png" id="monster4RespawnClock" alt="Часы респавна">
+    <div id="monster4Flash"></div>
+</div>
+
+<div class="lotus-saves-modal" id="lotusSavesModal">
+    <div class="lotus-saves-box">
+        <h2>🌸 Святилище Лотуса</h2>
+        <p class="lotus-saves-subtitle">Ваши точки возрождения</p>
+        <div class="lotus-saves-list" id="lotusSavesList">
+            <div class="lotus-save-empty">Нет активных сохранений. Посадите Лотус во время игры!</div>
+        </div>
+        <button class="lotus-close-btn" id="lotusSavesCloseBtn" type="button">ЗАКРЫТЬ</button>
+    </div>
+</div>
+
+<div class="lotus-cutscene-overlay" id="lotusCutsceneOverlay">
+    <video id="lotusCutsceneVideo" src="img/lotus_cutscene.mp4" preload="auto"></video>
+    <div class="lotus-white-flash" id="lotusWhiteFlash"></div>
+</div>
+
+<img src="img/lotus_ground.png" alt="Посаженный Лотус" class="lotus-ground-item" id="lotusGroundItem">
+
+<!-- АДМИН ПАНЕЛЬ (ПАРОЛЬ) -->
+<div id="adminPasswordModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 5, 8, 0.85); backdrop-filter: blur(8px); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="admin-pass-box" style="background: linear-gradient(135deg, #121216 0%, #0a0a0d 100%); padding: 30px; border-radius: 16px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.15); box-shadow: 0 15px 35px rgba(0,0,0,0.7); color: white; width: 320px; font-family: monospace;">
+        <h3 style="margin-top: 0; letter-spacing: 2px; color: #a29bfe; font-size: 16px; text-transform: uppercase;">Доступ к системе</h3>
+        <p style="font-size: 12px; color: #636e72; margin-bottom: 20px;">Введите секретный код администратора</p>
+        
+        <div id="passwordDisplay" style="font-size: 32px; letter-spacing: 8px; margin: 0 auto 20px auto; background: #050507; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1); color: #00b894; width: 80%;">_ _ _ _</div>
+        
+        <div class="pass-keypad" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 20px;">
+            <button class="pass-btn" data-num="1" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">1</button>
+            <button class="pass-btn" data-num="2" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">2</button>
+            <button class="pass-btn" data-num="3" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">3</button>
+            <button class="pass-btn" data-num="4" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">4</button>
+            <button class="pass-btn" data-num="5" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">5</button>
+            <button class="pass-btn" data-num="6" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">6</button>
+            <button class="pass-btn" data-num="7" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">7</button>
+            <button class="pass-btn" data-num="8" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">8</button>
+            <button class="pass-btn" data-num="9" style="background: #1e1e24; color: white; border: 1px solid rgba(255,255,255,0.1); padding: 14px; border-radius: 8px; font-size: 18px; cursor: pointer;">9</button>
+        </div>
+
+        <div style="display: flex; gap: 10px; justify-content: center;">
+            <button id="closePassModal" style="background: #2d3436; color: #dfe6e9; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold;">ЗАКРЫТЬ</button>
+            <button id="hideAdminPanelBtn" style="background: #d63031; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-size: 12px; font-weight: bold; display: none;">СКРЫТЬ ПАНЕЛЬ</button>
+        </div>
+    </div>
+</div>
+
+<!-- 5 УРОВЕНЬ (ПОБЕГ ОТ МОНСТРА) -->
+<div id="level5ChaseScreen" style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 99999; background: black; overflow: hidden;">
+    <video id="chaseVideoElement" src="audio/chase.mp4" style="width: 100%; height: 100%; object-fit: cover;" preload="auto" playsinline></video>
+    <div style="position: absolute; top: 30px; left: 50%; transform: translateX(-50%); width: 400px; text-align: center; font-family: monospace; z-index: 100000;">
+        <div style="color: white; font-size: 18px; font-weight: bold; margin-bottom: 8px;">ПУЛЬС</div>
+        <div style="width: 100%; height: 22px; background: rgba(0,0,0,0.6); border: 2px solid rgba(255,255,255,0.4); border-radius: 11px; overflow: hidden; padding: 2px;">
+            <div id="balanceBarFill" style="width: 100%; height: 100%; background: #4CAF50; border-radius: 8px; transition: width 0.3s ease, background-color 0.5s ease;"></div>
+        </div>
+        <div id="balanceText" style="color: white; font-size: 14px; margin-top: 4px;">100%</div>
+    </div>
+    <div id="chaseQteContainer"></div>
+</div>
+
+<!-- === КОНТЕЙНЕР БОСС-ФАЙТА (10 УРОВЕНЬ) === -->
+<div id="bossFightContainer" style="display: none; position: fixed; inset: 0; z-index: 99999; pointer-events: none;">
+    <!-- Затемнение для интро (0-10 сек) и белая вспышка -->
+    <div id="bossIntroScreen" style="position: absolute; inset: 0; background: black; z-index: 100000; transition: background-color 9s ease;"></div>
+    
+    <!-- Сам босс (левитирующий будильник) -->
+    <img id="bossSprite" src="img/boss_sprite.png" style="display: none; position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%) scale(0.3); width: 180px; z-index: 100001; pointer-events: auto; cursor: pointer; transition: transform 0.3s ease;">
+    
+    <!-- Контейнер для спавна маленьких будильников (Атака 2) -->
+    <div id="bossMiniAlarmsContainer" style="position: absolute; inset: 0; z-index: 100002; pointer-events: none;"></div>
+    
+    <!-- Шкала здоровья босса по центру экрана -->
+    <div id="bossHpBarContainer" style="display: none; position: absolute; top: 40px; left: 50%; transform: translateX(-50%); width: 350px; text-align: center; font-family: monospace; z-index: 100003;">
+        <div style="color: #ff3333; font-size: 16px; font-weight: bold; margin-bottom: 5px; text-shadow: 0 0 8px red;">ХРАНИТЕЛЬ ВРЕМЕНИ</div>
+        <div style="width: 100%; height: 20px; background: rgba(0,0,0,0.8); border: 2px solid #ff3333; border-radius: 10px; overflow: hidden; padding: 2px;">
+            <div id="bossHpFill" style="width: 100%; height: 100%; background: #ff3333; border-radius: 6px; transition: width 0.3s ease;"></div>
+        </div>
+        <div id="bossHpText" style="color: rgb(254, 89, 0); font-size: 13px; margin-top: 3px;">100 / 100</div>
+    </div>
+</div>
+
+<!-- АУДИО ДЛЯ БОССА -->
+<audio id="bossMusic" src="audio/boss_music.mp3" preload="auto"></audio>
+<audio id="loudAlarmAudio" src="audio/loud_alarm.mp3" preload="auto"></audio>
+<audio id="miniAlarmAudio" src="audio/mini_alarm_sound.mp3" preload="auto"></audio>
+<audio id="explosionAudio" src="audio/explosion_sound.mp3" preload="auto"></audio>
+
+
+<!-- Видео победы (просыпание в реальном мире) -->
+<video id="bossVictoryVideo" src="audio/victory_explosion.mp4" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 999999; display: none;" muted></video>
+
+<!-- Финальная картинка реального мира (где ты лежишь на кровати) -->
+<img id="bossWakeUpImage" src="img/real_world_wakeup.jpg" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; object-fit: cover; z-index: 999999; display: none;" alt="Пробуждение">
+
+<!-- Звук финального одиночного взрыва босса -->
+<audio id="bossFinalExplosionAudio" src="audio/final_explosion.mp3"></audio>
+
+<!-- Звук тяжелой отдышки (играет бесконечно в конце) -->
+<audio id="breathingAudio" src="audio/breathing.mp3" loop></audio>
+
+<!-- Финальные титры -->
+<div id="victoryCreditsContainer">
+    <div id="victoryCreditsScroll">
+        <div class="credit-main-title">Escape from dream core</div>
+        <div class="credit-section"><br></div>
+
+        <div class="credit-section">
+            <div class="credit-title">Игру создавали</div>
+            <div class="credit-name">Давид</div>
+            <div class="credit-name">Gemini</div>
+            <div class="credit-name">Chat GPT</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Дизайнеры</div>
+            <div class="credit-name">Давид</div>
+            <div class="credit-name">Chat GPT</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Основатель основы</div>
+            <div class="credit-name">Давид</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Идея</div>
+            <div class="credit-name">Давид</div>
+            <div class="credit-name">Gemini</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Функционал</div>
+            <div class="credit-name">Gemini</div>
+            <div class="credit-name">Chat GPT</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Пасхалки</div>
+            <div class="credit-name">Давид</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Звуки</div>
+            <div class="credit-name">TikTok</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Картинки</div>
+            <div class="credit-name">Google</div>
+            <div class="credit-name">Chat GPT</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-title">Тестировщики</div>
+            <div class="credit-name">Давид</div>
+            <div class="credit-name">Gemini</div>
+        </div>
+
+        <div class="credit-section">
+            <div class="credit-thanks">Спасибо за время, которое вы уделили игре</div>
+        </div>
+    </div>
+</div>
+
+<!-- ОТДЕЛЬНЫЙ СЛОЙ ЗАТЕМНЕНИЯ НА ВЕСЬ ЭКРАН -->
+<div id="mobileInventoryDarkOverlay" style="display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; background-color: rgba(0, 0, 0, 0.96); z-index: 9998;"></div>
+
+<!-- ИНВЕНТАРЬ (затемнение зашито прямо внутрь, чтобы перекрывать весь экран) -->
+<div class="INVENTORY2" >
+    <img class="inventory" src="img/hotbarInvetory.png" alt="">
+
+    <div class="inventory-slots">
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+        <div class="slot"></div><div class="slot"></div><div class="slot"></div><div class="slot"></div>
+    </div>
+
+    <div class="DELETE">
+        <button class="delete">X</button>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

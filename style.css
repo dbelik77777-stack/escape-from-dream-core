@@ -1,0 +1,3447 @@
+html{
+    overflow: hidden;
+    height: 110vh;    
+    margin: 0;        
+}
+
+body{
+    overflow: hidden;
+    height: 110vh;    
+    margin: 0;        
+
+    background-image:url("img/bed.jpg") ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;  
+    background-attachment: fixed;
+
+    position: relative;
+}
+
+.container{
+    display: none;
+}
+
+.hands{
+    width: 1200px;
+    height: 610px;
+    position: absolute;
+    top: 165px;
+    left: 200px;
+    animation: moveUpDown 2s ease-in-out infinite;
+}
+
+@keyframes moveUpDown {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(40px); }
+    100% { transform: translateY(0px); }
+}
+
+/* SLEEP */
+.sleeping{
+    background-color: #000000;
+    color: white;
+    border-radius: 2px;
+    width: 150px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    left: 700px;
+    top: 500px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sleeping:hover {
+    background-color: #c81400; 
+    color: #000000;
+}
+
+.wakeupButton {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    padding: 15px 30px;
+    font-size: 18px;
+    background-color: #ffffff;
+    color: #000000;
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 10000; 
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.wakeupButton.show {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+.screen-overlay.flash-white {
+    background-color: #ffffff !important;
+    transition: background-color 0s ease !important;
+}
+
+.screen-overlay.fade-out {
+    background-color: rgba(255, 255, 255, 0) !important;
+    transition: background-color 1s ease !important;
+}
+
+.startButton{
+    display: block; /* Убираем width и height, они здесь не нужны */
+    position: relative;
+}
+
+.screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0);
+    z-index: 9999;                      
+    transition: background-color 1s ease;
+    pointer-events: none;
+}
+
+.screen-overlay.active {
+    background-color: rgba(0, 0, 0, 1); 
+}
+
+/* ==================== НОВЫЕ ПРОГРЕСС-БАРЫ ==================== */
+.HP, .HUNGER, .ENERGY {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.heart, .burger, .energy {
+    width: 60px;
+}
+
+.bar-container {
+    background-color: #d9d9d9;
+    border: 2px solid black;
+    border-radius: 13px;
+    width: 200px;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    width: 100%;
+    background-color: #4CAF50;
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.bar-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: black;
+    font-size: 16px;
+}
+
+/* PORTALGUN */
+.PORTALGUN{
+    width: 120px;
+    height: 130px;
+    position: absolute;
+    left: 1100px;
+    top: 0px;
+}
+
+.portal{
+    width: 250px;
+    height: 300px;
+    position: absolute;
+    left: 650px;
+    display: none;
+}
+
+/* MAP */
+.map{
+    width: 120px;
+    position: absolute;
+    left: 1240px;
+    top: 0px;
+}
+
+.mapHotBar{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+}
+
+.MAP2{
+    display: none;
+    z-index: 9999 !important; /* Ставим огромный слой, чтобы книга перекрывала всё */
+}
+
+/* INVENTORY */
+.backpack{
+    width: 150px;
+    position: absolute;
+    left: 1350px;
+    top: 0px;
+}
+
+.inventory{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    z-index: 1;
+}
+
+/* WALK */
+.walking{
+    width: 150px;
+}
+
+.right{
+    position: absolute;
+    left: 1350px;
+    top: 300px;
+}
+
+.up{
+    position: absolute;
+    left: 700px;
+    top: 0px;
+}
+
+.left{
+    position: absolute;
+    left: 0px;
+    top: 300px;
+}
+
+/* DELETE */
+.delete{
+    background-color: red;
+    color: white;
+    border-radius: 100px;
+    border: 2px solid black;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.DELETE{
+    position: absolute;
+    left: 1300px;
+    top: 90px;
+    z-index: 2;
+}
+
+/* MONSTER */
+.jumpscare-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0); 
+    z-index: 9498;                     
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;               
+    transition: background-color 0.8s ease; 
+}
+
+#monsterImage, #monster2Image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+#monsterImage.visible, #monster2Image.visible {
+    display: block;
+    opacity: 1;
+}
+
+#monsterImage.fade-out, #monster2Image.fade-out {
+    opacity: 0;
+}
+
+.jumpscare-overlay.flash-green {
+    background-color: rgba(0, 255, 0, 0.8) !important; 
+    transition: background-color 0s ease !important;     
+}
+
+.jumpscare-overlay.show-monster {
+    background-color: rgba(0, 0, 0, 0.95) !important; 
+    transition: background-color 0s ease !important;
+}
+
+/* WATER & ENERGY DRINK & BANDAGE */
+.WATER{
+    width: 80px;
+    height: 170px;
+    position: absolute;
+    left: 700px;
+    top: 400px;
+    animation: moveUpDownWater 3s ease-in-out infinite;
+}
+
+.imgTime{
+    width: 150px; 
+    height: 150px;
+    position: absolute;
+    left: 700px;
+    top: 400px;
+    animation: moveUpDownWater 3s ease-in-out infinite;
+}
+
+.IMGforANIMATION{
+    width: 500px; 
+    height: 500px;
+}
+
+.SafeOFmonster{
+    position: absolute;
+    left: 500px;
+    top: 150px;
+}
+
+@keyframes moveUpDownWater {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(40px); }
+    100% { transform: translateY(0px); }
+}
+
+.ENERGYDRINK{
+    width: 180px;
+    height: 170px;
+    position: absolute;
+    left: 700px;
+    top: 400px;
+    animation: moveUpDownWater 3s ease-in-out infinite;
+}
+
+/* ИНВЕНТАРЬ И 24 КЛЕТКИ */
+.INVENTORY2 {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 100;
+}
+
+.inventory-slots {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.slot {
+    position: absolute;
+    width: 170px;
+    height: 100px;
+    left: 0px;
+    top: 0px;
+    z-index: 11;
+    pointer-events: auto;
+}
+
+.slot:nth-child(1)  { left: 250px; top: 150px; }
+.slot:nth-child(2)  { left: 420px; top: 150px; }
+.slot:nth-child(3)  { left: 600px; top: 150px; }
+.slot:nth-child(4)  { left: 770px; top: 150px; }
+.slot:nth-child(5)  { left: 940px; top: 150px; }
+.slot:nth-child(6)  { left: 1120px; top: 150px; }
+.slot:nth-child(7)  { left: 250px; top: 270px; }
+.slot:nth-child(8)  { left: 420px; top: 270px; }
+.slot:nth-child(9)  { left: 600px; top: 270px; }
+.slot:nth-child(10) { left: 770px; top: 270px; }
+.slot:nth-child(11) { left: 940px; top: 270px; }
+.slot:nth-child(12) { left: 1120px; top: 270px; }
+.slot:nth-child(13) { left: 250px; top: 390px; }
+.slot:nth-child(14) { left: 420px; top: 390px; }
+.slot:nth-child(15) { left: 600px; top: 390px; }
+.slot:nth-child(16) { left: 770px; top: 390px; }
+.slot:nth-child(17) { left: 940px; top: 390px; }
+.slot:nth-child(18) { left: 1120px; top: 390px; }
+.slot:nth-child(19) { left: 250px; top: 515px; }
+.slot:nth-child(20) { left: 420px; top: 515px; }
+.slot:nth-child(21) { left: 600px; top: 515px; }
+.slot:nth-child(22) { left: 770px; top: 515px; }
+.slot:nth-child(23) { left: 940px; top: 515px; }
+.slot:nth-child(24) { left: 1120px; top: 515px; }
+
+.slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 12;
+    pointer-events: auto;
+}
+
+.inventory {
+    z-index: 1;
+    pointer-events: none;
+}
+
+/* DO YOU WANT USE THIS? / DEATH SCREEN */
+.UseThis, .DeathScreenBox{
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 13px;
+    width: 400px;
+    height: 200px;
+    background-color: #6c6c6c;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.moda{
+    background-color: #d9d9d9;
+    color: #000000;
+    border: 2px solid black;
+    border-radius: 13px;
+    width: 100px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.disagne{
+    font-size: 23px;
+    color: white;
+}
+
+.boxBut{
+    display: flex;
+    width: 230px;
+    justify-content: space-between;
+}
+
+.bruh {
+    display: none;
+    position: fixed;
+    left: 580px;
+    top: 300px;
+    transform: translate(-50%, -50%);
+    z-index: 200;
+}
+
+.deathScreenContainer {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    z-index: 30000;
+    justify-content: center;
+    align-items: center;
+}
+
+/* BANDAGE */
+.BANDAGE{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 680px;
+    top: 400px;
+    z-index: 10;
+    animation: moveUpDownWater 3s ease-in-out infinite;
+}
+
+/* MAP INTERFACE */
+.MAP2 {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 150;
+}
+
+.closeMap, .closeGun {
+    position: absolute;
+    left: 1300px;
+    top: 90px;
+    z-index: 2;
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    font-size: 35px;
+    cursor: pointer;
+}
+
+/* PORTAL GUN INTERFACE */
+.portalGunHotBar {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 200;
+}
+
+.portalGunInterface {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: fill;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.doorIMG{
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    left: 650px;
+    top: 200px;
+    cursor: pointer;
+    pointer-events: auto;
+}
+
+.doorSpawn{
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    pointer-events: none;
+}
+
+.portalLevelInput {
+    position: absolute;
+    left: 720px;
+    top: 420px;
+    width: 120px;
+    height: 45px;
+    box-sizing: border-box;
+    background: #E30000;
+    color: white;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 1px solid #E30000;
+    border-radius: 8px;
+    outline: none;
+    box-shadow: 0 0 10px #E30000;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.portalLaunchButton {
+    position: absolute;
+    left: 720px;
+    top: 514px;
+    width: 120px;
+    height: 60px;
+    opacity: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    z-index: 3;
+}
+
+/* EYE close open */
+.eyesCLOSE {
+    position: absolute;
+    left: 1400px;
+    top: 640px;
+    border: 1px solid #000000;
+    border-radius: 100%;
+    background-color: #6c6c6c;
+    width: 100px;
+    height: 100px;
+    z-index: 9500;       
+    cursor: pointer;
+}
+
+.eyeIMG{
+    width: 100%;
+    margin-top: 25px;
+}
+
+.eyelids-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9499;       
+    overflow: hidden;
+}
+
+.eyelid {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: #000000;
+    transition: transform 0.6s ease-in-out;
+}
+
+.top-eyelid {
+    top: 0;
+    transform: translateY(-100%);
+}
+
+.bottom-eyelid {
+    bottom: 0;
+    transform: translateY(100%);
+}
+
+.eyelids-overlay.closed .top-eyelid {
+    transform: translateY(0);
+}
+
+.eyelids-overlay.closed .bottom-eyelid {
+    transform: translateY(0);
+}
+
+#respawnAnimation {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    z-index: 10001;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+#respawnAnimation img {
+    display: block;
+    width: 180px;
+    height: auto;
+}
+
+#respawnClockOverlay {
+    display: none;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    width: 80px;
+    height: auto;
+    z-index: 10002;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+#respawnAnimation.respawn-sink,
+#respawnClockOverlay.respawn-sink,
+#monsterImage.respawn-sink,
+#monster2Image.respawn-sink {
+    animation: respawnSink 1.5s ease-in forwards;
+}
+
+@keyframes respawnSink {
+    0% {
+        translate: 0 0;
+        rotate: 0deg;
+        opacity: 1;
+    }
+    15% {
+        translate: -8px 0;
+        rotate: -4deg;
+    }
+    30% {
+        translate: 8px 0;
+        rotate: 4deg;
+    }
+    45% {
+        translate: -5px 0;
+        rotate: -2deg;
+    }
+    100% {
+        translate: 0 220px;
+        rotate: 0deg;
+        opacity: 0;
+    }
+}
+
+/* ========== ACHIEVEMENTS ========== */
+.achievements-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 40000;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(3px);
+}
+
+.achievements-screen.open {
+    display: flex;
+    animation: achievementFadeIn 0.25s ease;
+}
+
+@keyframes achievementFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.achievements-panel {
+    width: min(1100px, 96vw);
+    height: min(720px, 90vh);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid #21dfff;
+    border-radius: 18px;
+    color: #e7faff;
+    background: linear-gradient(145deg, #07111f, #101d32 70%, #08101e);
+    box-shadow: 0 0 25px #00bfff, inset 0 0 20px #102d49;
+    animation: achievementPanelIn 0.3s ease;
+}
+
+@keyframes achievementPanelIn {
+    from { transform: scale(0.94) translateY(15px); }
+    to { transform: scale(1) translateY(0); }
+}
+
+.achievements-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #1c536d;
+}
+
+.achievements-header h1 {
+    margin: 0;
+    color: #5cecff;
+    font-size: 28px;
+    letter-spacing: 3px;
+    text-shadow: 0 0 12px #00bfff;
+}
+
+.achievements-header p {
+    margin: 6px 0 0;
+    color: #9cb8ca;
+}
+
+.achievements-close {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    border: 1px solid #ff5151;
+    border-radius: 10px;
+    color: white;
+    background: #a51928;
+    box-shadow: 0 0 12px #ff263f;
+    font-size: 32px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.achievements-close:hover {
+    background: #f32642;
+    transform: rotate(90deg);
+}
+
+.achievements-progress {
+    padding: 12px 24px;
+    color: #7cefff;
+    border-bottom: 1px solid #17384d;
+    font-weight: bold;
+}
+
+.achievements-content {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 16px;
+    padding: 16px;
+    min-height: 0;
+    flex: 1;
+}
+
+.achievements-list {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 4px 8px 4px 4px;
+}
+
+.achievement-card {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border: 1px solid #29455b;
+    border-left: 5px solid var(--tier-color);
+    border-radius: 9px;
+    color: #eaf8ff;
+    background: #101e30;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.achievement-card:hover {
+    background: #1a3249;
+    transform: translateX(3px);
+    box-shadow: 0 0 12px var(--tier-color);
+}
+
+.achievement-card.selected {
+    background: #19354b;
+    box-shadow: inset 0 0 12px #16769a;
+}
+
+.achievement-card.unlocked {
+    background: linear-gradient(90deg, #143246, #102032);
+}
+
+.achievement-symbol {
+    width: 35px;
+    flex-shrink: 0;
+    color: var(--tier-color);
+    font-size: 25px;
+    text-align: center;
+    text-shadow: 0 0 10px var(--tier-color);
+}
+
+.achievement-card-name {
+    display: block;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.achievement-card-tier {
+    display: block;
+    margin-top: 4px;
+    color: var(--tier-color);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.achievement-status {
+    margin-left: auto;
+    color: #72f5b4;
+    font-size: 19px;
+}
+
+.achievement-details {
+    overflow-y: auto;
+    padding: 22px;
+    border: 1px solid #234b64;
+    border-radius: 12px;
+    background: rgba(4, 14, 27, 0.85);
+}
+
+.achievement-details h2 {
+    margin-top: 0;
+    color: #66edff;
+}
+
+.achievement-details p {
+    line-height: 1.6;
+    color: #bfd3e1;
+}
+
+.achievement-detail-tier {
+    color: var(--tier-color);
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.achievement-unlocked-label {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #41f0a3;
+    border-radius: 6px;
+    color: #7affbd;
+    background: #10382e;
+}
+
+/* Цвета сложности */
+.tier-easy { --tier-color: #42f58d; }
+.tier-normal { --tier-color: #44dfff; }
+.tier-medium { --tier-color: #ffb84d; }
+.tier-hard { --tier-color: #ff555f; }
+.tier-veryhard { --tier-color: #cf7bff; }
+.tier-impossible { --tier-color: #ff263f; }
+
+.achievement-toast {
+    position: fixed;
+    top: 22px;
+    left: 20px;
+    z-index: 50000;
+    width: min(350px, calc(100vw - 40px));
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 15px;
+    border: 1px solid #36eaff;
+    border-left: 5px solid #36eaff;
+    border-radius: 10px;
+    color: white;
+    background: linear-gradient(110deg, #071a2c, #123954);
+    box-shadow: 0 0 20px #00bfff;
+    transform: translateX(calc(-100% - 40px));
+    opacity: 0;
+    pointer-events: none;
+}
+
+.achievement-toast.show {
+    animation: achievementToastInOut 4s ease both;
+}
+
+.toast-icon {
+    color: #65f0ff;
+    font-size: 34px;
+    text-shadow: 0 0 12px #00d9ff;
+}
+
+.toast-label {
+    color: #66edff;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.toast-name {
+    margin-top: 5px;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+@keyframes achievementToastInOut {
+    0% { transform: translateX(calc(-100% - 40px)); opacity: 0; }
+    12%, 80% { transform: translateX(0); opacity: 1; }
+    100% { transform: translateX(calc(-100% - 40px)); opacity: 0; }
+}
+
+.achievements-reset-btn {
+    flex-shrink: 0;
+    padding: 0 14px;
+    height: 48px;
+    border: 1px solid #ff5151;
+    border-radius: 10px;
+    color: #ffb1b1;
+    background: #621019;
+    box-shadow: 0 0 12px #ff263f;
+    font-size: 13px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.achievements-reset-btn:hover {
+    color: white;
+    background: #a51928;
+    box-shadow: 0 0 20px #ff263f;
+    transform: scale(1.03);
+}
+
+.achievement-confirm-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50000;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(4px);
+}
+
+.achievement-confirm-screen.open {
+    display: flex;
+    animation: achievementFadeIn 0.25s ease;
+}
+
+.achievement-confirm-box {
+    width: min(420px, 92vw);
+    padding: 24px;
+    border: 2px solid #36eaff;
+    border-radius: 16px;
+    color: #e7faff;
+    background: linear-gradient(145deg, #07111f, #101d32);
+    box-shadow: 0 0 30px #00bfff, inset 0 0 15px #102d49;
+    text-align: center;
+}
+
+.achievement-confirm-box h2 {
+    margin-top: 0;
+    color: #5cecff;
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px #00bfff;
+}
+
+.achievement-confirm-box p {
+    color: #bfd3e1;
+    font-size: 15px;
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.achievement-confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.confirm-btn {
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    letter-spacing: 1px;
+    transition: 0.2s ease;
+}
+
+.confirm-btn.yes {
+    border: 1px solid #ff5151;
+    color: white;
+    background: #a51928;
+    box-shadow: 0 0 12px #ff263f;
+}
+
+.confirm-btn.yes:hover {
+    background: #f32642;
+    box-shadow: 0 0 20px #ff263f;
+    transform: scale(1.05);
+}
+
+.confirm-btn.no {
+    border: 1px solid #36eaff;
+    color: #36eaff;
+    background: #061c36;
+    box-shadow: 0 0 10px #00cfff;
+}
+
+.confirm-btn.no:hover {
+    color: white;
+    background: #087a9b;
+    box-shadow: 0 0 20px #00eaff;
+    transform: scale(1.05);
+}
+
+#monsterImage, #monster2Image, #monster3Image {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    object-fit: cover; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#monster3Image {
+    width: 100% !important;        
+    /* height: 800px !important;       */
+    object-fit: fill !important;   
+    top: 0 !important;
+    left: 0 !important;
+    transform: none !important;    
+}
+
+/* АДМИН-ПАНЕЛЬ */
+.admin-open-btn {
+    display: none;
+    position: fixed;
+    bottom: 22px;
+    left: 25px;
+    width: 120px;
+    height: 50px;
+    z-index: 10001;
+    border: 2px solid #00ff66;
+    border-radius: 10px;
+    color: #9dffc4;
+    background: linear-gradient(135deg, #063618, #095025);
+    box-shadow: 0 0 12px #00ff66, inset 0 0 10px #007fa5;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.admin-open-btn.show { display: block; }
+.admin-open-btn:hover {
+    color: white;
+    background: #089b45;
+    box-shadow: 0 0 25px #00ff66;
+    transform: scale(1.05);
+}
+
+.admin-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 45000;
+    background: rgba(0, 0, 0, 0.6);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    backdrop-filter: blur(3px);
+}
+
+.admin-screen.open {
+    display: flex;
+    animation: achievementFadeIn 0.25s ease;
+}
+
+.admin-panel {
+    width: min(550px, 92vw);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border: 2px solid #00ff66;
+    border-radius: 18px;
+    color: #e7faff;
+    background: linear-gradient(145deg, #071f11, #10321d 70%, #081e11);
+    box-shadow: 0 0 25px #00ff66, inset 0 0 20px #104928;
+    padding: 20px 24px;
+    box-sizing: border-box;
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1c6d3b;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+}
+
+.admin-header h2 {
+    margin: 0;
+    color: #5cff9d;
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-shadow: 0 0 12px #00ff66;
+}
+
+.admin-close-btn {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border: 1px solid #ff5151;
+    border-radius: 10px;
+    color: white;
+    background: #a51928;
+    box-shadow: 0 0 12px #ff263f;
+    font-size: 26px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.admin-close-btn:hover {
+    background: #f32642;
+    transform: rotate(90deg);
+}
+
+.admin-section-title {
+    font-size: 14px;
+    font-weight: bold;
+    color: #7cffbe;
+    margin: 12px 0 8px 0;
+    letter-spacing: 1px;
+}
+
+.admin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+.admin-btn {
+    padding: 12px;
+    border: 1px solid #00ff66;
+    border-radius: 8px;
+    background: #092f1a;
+    color: #bdfad5;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 0 8px rgba(0, 255, 102, 0.3);
+}
+
+.admin-btn:hover {
+    background: #0ea850;
+    color: white;
+    box-shadow: 0 0 15px #00ff66;
+    transform: scale(1.02);
+}
+
+.admin-btn.monster {
+    border-color: #ff555f;
+    background: #361014;
+    color: #ffb1b6;
+    box-shadow: 0 0 8px rgba(255, 85, 95, 0.3);
+}
+
+.admin-btn.monster:hover {
+    background: #a51928;
+    color: white;
+    box-shadow: 0 0 15px #ff263f;
+}
+
+.admin-btn.god.active {
+    background: #00ff66;
+    color: #000000;
+    box-shadow: 0 0 20px #00ff66;
+}
+
+/* СЧЁТЧИК КМ */
+.KM-counter-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 5px;
+    background: rgba(0, 0, 0, 0.7);
+    border: 2px solid #ff3b3b;
+    border-radius: 13px;
+    padding: 4px 12px;
+    width: max-content;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    position: relative;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
+}
+
+.km-popup {
+    position: absolute;
+    right: -25px;
+    top: 0;
+    color: #00ff66;
+    font-weight: bold;
+    font-size: 16px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.km-popup.anim {
+    animation: kmPopupAnim 0.6s ease forwards;
+}
+
+@keyframes kmPopupAnim {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-25px); opacity: 0; }
+}
+
+.km-icon {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    vertical-align: middle;
+}
+
+/* МАГАЗИН */
+.shop-screen {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 60000;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(4px);
+}
+
+.shop-screen.open {
+    display: flex;
+    animation: winOpenAnim 0.25s ease;
+}
+
+@keyframes winOpenAnim {
+    from { transform: scale(0.9); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+.shop-window {
+    width: min(900px, 95vw);
+    height: min(650px, 90vh);
+    background: #ffffff;
+    border: 3px solid #cc0000;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(204, 0, 0, 0.5);
+    overflow: hidden;
+}
+
+.win10-titlebar {
+    background: #b30000;
+    color: white;
+    padding: 12px 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 2px solid #800000;
+}
+
+.win10-controls {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.win10-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 2px 8px;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.win10-close:hover { background: #e60000; }
+
+.shop-reset-btn {
+    background: #800000;
+    border: 1px solid #ff4d4d;
+    color: #ffcccc;
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.shop-reset-btn:hover {
+    background: #ff1a1a;
+    color: white;
+    box-shadow: 0 0 8px #ff4d4d;
+}
+
+.shop-content {
+    flex: 1;
+    background: #f2f2f2;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.shop-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.shop-card {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.shop-card:hover {
+    border-color: #cc0000;
+    transform: translateY(-4px);
+    box-shadow: 0 8px 15px rgba(204, 0, 0, 0.15);
+}
+
+.shop-card img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    margin-bottom: 12px;
+}
+
+.shop-card h3 { margin: 0 0 8px 0; font-size: 18px; color: #333; }
+.shop-card .price { font-size: 16px; font-weight: bold; color: #cc0000; margin-bottom: 14px; }
+
+.buy-btn {
+    width: 100%;
+    padding: 10px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.buy-btn:hover { background: #218838; }
+.buy-btn.bought { background: #6c757d; }
+.buy-btn.equipped { background: #007bff; }
+.buy-btn.equipped:hover { background: #0056b3; }
+
+.shop-desc-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 65000;
+    background: rgba(0,0,0,0.6);
+    justify-content: center;
+    align-items: center;
+}
+
+.shop-desc-box {
+    width: 350px;
+    background: white;
+    border: 2px solid #cc0000;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.shop-desc-box h3 { margin-top: 0; color: #b30000; }
+.shop-desc-box p { color: #555; font-size: 15px; line-height: 1.4; margin-bottom: 20px; }
+
+.desc-close-btn {
+    padding: 8px 20px;
+    background: #cc0000;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ЭЛЕКТРОШОКЕР */
+.shocker-anim-container {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 55000;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.shocker-lightning-layer {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+}
+
+.shocker-bolt {
+    position: absolute;
+    font-size: clamp(35px, 6vw, 85px);
+    line-height: 1;
+    color: #fff700;
+    text-shadow: 0 0 8px #ffffff, 0 0 18px #00eaff, 0 0 35px #008cff;
+    animation: lightningAppear 0.42s ease-out forwards;
+    will-change: transform, opacity;
+}
+
+@keyframes lightningAppear {
+    0% { opacity: 0; transform: scale(0.35) rotate(-25deg); }
+    25% { opacity: 1; transform: scale(1.25) rotate(12deg); }
+    55% { opacity: 0.9; transform: scale(1) rotate(-8deg); }
+    100% { opacity: 0; transform: scale(0.7) rotate(15deg); }
+}
+
+#monsterImage.shocker-hit {
+    display: block !important;
+    opacity: 1 !important;
+    animation: monsterElectrocuted 2.6s ease-in forwards !important;
+    transform-origin: center center;
+    will-change: transform, opacity;
+}
+
+@keyframes monsterElectrocuted {
+    0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    8% { transform: translate(-18px, 0) rotate(-2deg); opacity: 1; }
+    16% { transform: translate(18px, 0) rotate(2deg); opacity: 1; }
+    24% { transform: translate(-15px, 0) rotate(-2deg); opacity: 1; }
+    32% { transform: translate(15px, 0) rotate(2deg); opacity: 1; }
+    40% { transform: translate(-10px, 0) rotate(-1deg); opacity: 1; }
+    48% { transform: translate(10px, 0) rotate(1deg); opacity: 1; }
+    58% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
+    72% { transform: translate(0, 18vh) rotate(8deg); opacity: 0.85; }
+    100% { transform: translate(0, 100vh) rotate(25deg); opacity: 0; }
+}
+
+/* ТЕЛЕФОН И МАЙНЕР */
+.phoneOpenBtn {
+    position: fixed;
+    right: 165px;
+    bottom: 35px;
+    z-index: 5000;
+    width: 100px;
+    height: 100px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #101010;
+    border: 2px solid #39ff14;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 0 10px #39ff1460;
+    transition: 0.2s;
+    box-sizing: border-box;
+}
+
+.phoneOpenBtn:hover {
+    box-shadow: 0 0 18px #39ff14;
+    transform: scale(1.06);
+}
+
+.phoneOpenBtn img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+#phoneDarkOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9998;
+    background: rgba(0, 0, 0, 0.25);
+    display: none;
+}
+
+#phoneDarkOverlay.phoneVisible { display: block; }
+
+#phoneInterface {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(370px, calc(100vw - 30px));
+    max-height: 90vh;
+    overflow-y: auto;
+    box-sizing: border-box;
+    display: none;
+    z-index: 9999;
+    color: #e9ffe5;
+    background: #080b09;
+    border: 2px solid #39ff14;
+    border-radius: 22px;
+    box-shadow: 0 0 12px #39ff1470, 0 0 45px #39ff1430;
+    font-family: Consolas, monospace;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+#phoneInterface::-webkit-scrollbar { display: none; }
+
+#phoneInterface.phoneVisible {
+    display: block;
+    animation: phoneAppear 0.2s ease-out;
+}
+
+@keyframes phoneAppear {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+.phoneTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 18px;
+    background: #101710;
+    border-bottom: 1px solid #39ff1450;
+}
+
+.phoneLogo {
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.phoneLogo span { color: #39ff14; }
+
+#phoneCloseBtn {
+    width: 30px;
+    height: 30px;
+    color: #39ff14;
+    background: #111;
+    border: 1px solid #39ff14;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.phoneContent {
+    padding: 22px 20px 16px;
+    text-align: center;
+}
+
+.minerIcon {
+    width: 66px;
+    height: 66px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #39ff14;
+    font-size: 40px;
+    font-weight: bold;
+    background: #0d180d;
+    border: 2px solid #39ff14;
+    border-radius: 18px;
+    box-shadow: 0 0 18px #39ff1435;
+}
+
+.phoneContent h2 {
+    margin: 5px 0;
+    color: #39ff14;
+    font-size: 25px;
+    letter-spacing: 3px;
+}
+
+.minerSubtitle {
+    margin: 5px 0 20px;
+    color: #8eaa8a;
+    font-size: 10px;
+    letter-spacing: 2px;
+}
+
+.minerBalance {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 15px;
+    background: #101710;
+    border: 1px solid #234b23;
+    border-radius: 12px;
+}
+
+.minerBalance > span,
+.minerTimerBox > span,
+.phoneUpgradeInfo > span {
+    color: #8eaa8a;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.minerBalance strong {
+    color: #39ff14;
+    font-size: 27px;
+}
+
+.minerTimerBox {
+    margin-top: 15px;
+    padding: 18px 12px;
+    background: #050805;
+    border: 1px solid #39ff1460;
+    border-radius: 12px;
+}
+
+.minerTimer {
+    margin: 10px 0;
+    color: #39ff14;
+    font-size: 44px;
+    font-weight: bold;
+    text-shadow: 0 0 12px #39ff1480;
+}
+
+.minerTimer small { font-size: 13px; text-shadow: none; }
+
+.minerProgress {
+    height: 7px;
+    overflow: hidden;
+    background: #202820;
+    border-radius: 10px;
+}
+
+#phoneMinerProgress {
+    width: 0%;
+    height: 100%;
+    background: #39ff14;
+    box-shadow: 0 0 10px #39ff14;
+    transition: width 0.2s linear;
+}
+
+.minerTimerBox p {
+    margin: 12px 0 0;
+    color: #39ff14;
+    font-size: 12px;
+}
+
+.phoneUpgradeInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 18px 0 12px;
+}
+
+.phoneUpgradeInfo strong {
+    color: #39ff14;
+    font-size: 14px;
+}
+
+.phoneNeonBtn {
+    position: relative;
+    width: 100%;
+    min-height: 48px;
+    margin-top: 10px;
+    padding: 12px;
+    color: #39ff14;
+    background: #050805;
+    border: 1px solid #39ff14;
+    border-radius: 9px;
+    font-family: Consolas, monospace;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.phoneNeonBtn:hover:not(:disabled) {
+    color: #050805;
+    background: #39ff14;
+    box-shadow: 0 0 18px #39ff1470;
+}
+
+.phoneNeonBtn:disabled {
+    color: #60745d;
+    border-color: #344a32;
+    cursor: default;
+    opacity: 0.75;
+}
+
+.antivirusBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    border-color: #277d20;
+    color: #78bd70;
+}
+
+.antivirusBtn span { font-size: 9px; color: #8eaa8a; }
+
+.phoneFooter {
+    margin-top: 20px;
+    color: #536b50;
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.phoneMinerResetBtn {
+    width: 100%;
+    margin-top: 9px;
+    padding: 9px 6px;
+    color: #ff9292;
+    background: #210808;
+    border: 1px solid #a51f2b;
+    border-radius: 8px;
+    font-family: Consolas, monospace;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.phoneMinerResetBtn:hover {
+    background: #7d101b;
+    color: white;
+    box-shadow: 0 0 12px #ff263f;
+}
+
+.monster4-warning {
+    display: none;
+    width: 125px;
+    height: 125px;
+    margin: 12px auto;
+    object-fit: contain;
+    filter: drop-shadow(0 0 12px red);
+}
+
+.monster4-warning.active {
+    display: block;
+    animation: monster4WarningPulse 0.25s infinite alternate;
+}
+
+@keyframes monster4WarningPulse {
+    from { transform: scale(0.95); filter: drop-shadow(0 0 8px red); }
+    to { transform: scale(1.06); filter: drop-shadow(0 0 22px red); }
+}
+
+.antivirusBtn { border-color: #ff3030; }
+.antivirusBtn.warning-active {
+    color: white;
+    background: #a00000;
+    border-color: #ff3333;
+    box-shadow: 0 0 18px red;
+    animation: antivirusPulse 0.3s infinite alternate;
+}
+
+@keyframes antivirusPulse {
+    from { transform: scale(1); }
+    to { transform: scale(1.04); }
+}
+
+#monster4Jumpscare {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: #b00000;
+    z-index: 100000;
+    align-items: center;
+    justify-content: center;
+    pointer-events: all;
+}
+
+#monster4Jumpscare.active {
+    display: flex;
+    animation: monster4RedBackground 0.16s steps(2, end) infinite;
+}
+
+#monster4ScreamImage {
+    position: relative;
+    z-index: 1;
+    display: block;
+    width: min(100vw, 100vh);
+    height: min(100vw, 100vh);
+    max-width: none;
+    max-height: none;
+    object-fit: contain;
+    transform-origin: center center;
+}
+
+#monster4Jumpscare.active #monster4ScreamImage {
+    animation: monster4ScreamMotion 3s linear forwards;
+}
+
+@keyframes monster4RedBackground {
+    0%, 100% { background-color: #b00000; }
+    50% { background-color: #ff0000; }
+}
+
+@keyframes monster4ScreamMotion {
+    0%   { transform: translate(0, 0) scale(0.30); }
+    2%   { transform: translate(-18px, 14px) scale(0.32); }
+    4%   { transform: translate(16px, -17px) scale(0.34); }
+    6%   { transform: translate(-14px, -19px) scale(0.36); }
+    8%   { transform: translate(20px, 12px) scale(0.38); }
+    10%  { transform: translate(-22px, 5px) scale(0.40); }
+    12%  { transform: translate(12px, -20px) scale(0.42); }
+    14%  { transform: translate(-19px, 17px) scale(0.44); }
+    16%  { transform: translate(21px, -9px) scale(0.46); }
+    18%  { transform: translate(-11px, -21px) scale(0.48); }
+    20%  { transform: translate(18px, 19px) scale(0.50); }
+    22%  { transform: translate(-23px, -7px) scale(0.52); }
+    24%  { transform: translate(14px, 22px) scale(0.54); }
+    26%  { transform: translate(-17px, -18px) scale(0.56); }
+    28%  { transform: translate(24px, 9px) scale(0.58); }
+    30%  { transform: translate(-20px, 16px) scale(0.60); }
+    32%  { transform: translate(10px, -23px) scale(0.62); }
+    34%  { transform: translate(-24px, -12px) scale(0.64); }
+    36%  { transform: translate(19px, 21px) scale(0.66); }
+    38%  { transform: translate(-13px, -20px) scale(0.68); }
+    40%  { transform: translate(25px, -5px) scale(0.70); }
+    42%  { transform: translate(-21px, 18px) scale(0.72); }
+    44%  { transform: translate(15px, -24px) scale(0.74); }
+    46%  { transform: translate(-25px, -9px) scale(0.76); }
+    48%  { transform: translate(20px, 17px) scale(0.78); }
+    50%  { transform: translate(-16px, -22px) scale(0.80); }
+    52%  { transform: translate(26px, 7px) scale(0.82); }
+    54%  { transform: translate(-22px, 20px) scale(0.84); }
+    56%  { transform: translate(13px, -25px) scale(0.86); }
+    58%  { transform: translate(-26px, -13px) scale(0.88); }
+    60%  { transform: translate(22px, 19px) scale(0.90); }
+    62%  { transform: translate(-15px, -24px) scale(0.92); }
+    64%  { transform: translate(27px, -6px) scale(0.94); }
+    66%  { transform: translate(-23px, 21px) scale(0.96); }
+    68%  { transform: translate(17px, -26px) scale(0.98); }
+    70%  { transform: translate(-27px, -15px) scale(1); }
+    72%  { transform: translate(24px, 20px) scale(1); }
+    74%  { transform: translate(-18px, -25px) scale(1); }
+    76%  { transform: translate(28px, -8px) scale(1); }
+    78%  { transform: translate(-24px, 22px) scale(1); }
+    80%  { transform: translate(19px, -27px) scale(1); }
+    82%  { transform: translate(-28px, -16px) scale(1); }
+    84%  { transform: translate(25px, 21px) scale(1); }
+    86%  { transform: translate(-19px, -26px) scale(1); }
+    88%  { transform: translate(29px, -9px) scale(1); }
+    90%  { transform: translate(-25px, 23px) scale(1); }
+    92%  { transform: translate(20px, -28px) scale(1); }
+    94%  { transform: translate(-29px, -17px) scale(1); }
+    96%  { transform: translate(26px, 22px) scale(1); }
+    98%  { transform: translate(-20px, -27px) scale(1); }
+    100% { transform: translate(28px, 12px) scale(1); }
+}
+
+#monster4Flash {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+}
+
+#monster4Jumpscare.active #monster4Flash {
+    animation: monster4FinalFlash 0.3s linear 2.0s forwards;
+}
+
+@keyframes monster4FinalFlash {
+    0% { opacity: 0; background: white; }
+    20% { opacity: 1; background: white; }
+    50% { opacity: 1; background: #ff0000; }
+    75% { opacity: 1; background: white; }
+    100% { opacity: 1; background: #ff0000; }
+}
+
+#monster4RespawnClock {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(45vw, 350px);
+    max-height: 70vh;
+    height: auto;
+    object-fit: contain;
+    z-index: 10000;
+    animation: none !important;
+    transition: none !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+#monster4Jumpscare.respawn-clock-mode #monster4ScreamImage {
+    display: none !important;
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+}
+
+#monster4Jumpscare.respawn-clock-mode #monster4RespawnClock {
+    display: block !important;
+    animation: none !important;
+    transition: none !important;
+    transform: translate(-50%, -50%) !important;
+}
+
+#monster4Jumpscare {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#monster4Jumpscare.active { opacity: 1; }
+
+#monster4Jumpscare.fading #monster4ScreamImage,
+#monster4Jumpscare.fading #monster4Flash,
+#monster4Jumpscare.fading #monster4RespawnClock {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+#monster4Jumpscare.clock-protection-mode #monster4RespawnClock {
+    display: block;
+}
+
+#monster4Jumpscare.clock-protection-mode {
+    background-color: #ff0000;
+    animation: monster4ClockBlue 0.35s ease-out forwards !important;
+}
+
+@keyframes monster4ClockBlue {
+    from { background-color: #ff0000; }
+    to { background-color: #66cfff; }
+}
+
+#monster4Jumpscare.clock-protection-mode #monster4ScreamImage {
+    animation: monster4HeadShakeOnly 0.12s infinite !important;
+    transform-origin: center center;
+}
+
+@keyframes monster4HeadShakeOnly {
+    0%   { transform: translate(0, 0) rotate(0deg); }
+    25%  { transform: translate(-5px, 2px) rotate(-2deg); }
+    50%  { transform: translate(5px, -2px) rotate(2deg); }
+    75%  { transform: translate(-3px, -1px) rotate(-1deg); }
+    100% { transform: translate(0, 0) rotate(0deg); }
+}
+
+#monster4Jumpscare.clock-protection-mode #monster4RespawnClock {
+    display: block !important;
+}
+
+#monster4Jumpscare.fading {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease !important;
+}
+
+#monster4Jumpscare.fading #monster4ScreamImage,
+#monster4Jumpscare.fading #monster4RespawnClock,
+#monster4Jumpscare.fading #monster4Flash {
+    opacity: 0 !important;
+    transition: opacity 0.5s ease !important;
+}
+
+#monster4Jumpscare.clock-protection-mode #monster4Flash {
+    display: none !important;
+}
+
+.monster5-glitch .bar-container {
+    position: relative;
+    visibility: hidden;
+}
+
+.monster5-glitch .bar-container::after {
+    content: "ERROR 404";
+    position: absolute;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: inherit;
+    border: 1px solid #39ff70;
+    color: #39ff70;
+    background: #050505;
+    font-family: monospace;
+    font-size: 10px;
+    font-weight: bold;
+    visibility: visible;
+    animation: monster5BarGlitch 0.18s steps(2, end) infinite;
+}
+
+@keyframes monster5BarGlitch {
+    0% { transform: translateX(-2px); }
+    50% { transform: translateX(2px); }
+    100% { transform: translateX(0); }
+}
+
+#monster5HackOverlay.active { display: block; }
+.monster5-hack-message {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 24px;
+    text-align: center;
+    background: #000e;
+    border: 1px solid #39ff70;
+}
+
+.monster5-hack-progress {
+    height: 8px;
+    margin-top: 18px;
+    background: #16301b;
+    border: 1px solid #39ff70;
+}
+
+.monster5-hack-progress-fill {
+    width: 0%;
+    height: 100%;
+    background: #39ff70;
+}
+
+/* БИБЛИОТЕКА ПРИЛОЖЕНИЙ ТЕЛЕФОНА */
+.phone-app-library,
+.phone-app-screen {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.phone-library-title {
+    color: #8dff80;
+    text-align: center;
+    letter-spacing: 3px;
+    margin-top: 12px;
+}
+
+.phone-library-subtitle {
+    color: #829783;
+    text-align: center;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+}
+
+.phone-app-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.phone-app-card {
+    min-width: 0;
+    min-height: 150px;
+    padding: 16px 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: #111812;
+    border: 1px solid #315238;
+    border-radius: 12px;
+    color: #d9ffdb;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+
+.phone-app-card:hover {
+    background: #1b2a1d;
+    border-color: #63ff75;
+    box-shadow: 0 0 15px #39ff7033;
+    transform: translateY(-2px);
+}
+
+.phone-app-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.miner-app-icon {
+    color: #a7ff8b;
+    background: #203a20;
+    border: 1px solid #4c8c42;
+}
+
+.hack-app-icon {
+    color: #39ff70;
+    background: #020603;
+    border: 1px solid #39ff70;
+    text-shadow: 0 0 8px #39ff70;
+}
+
+.phone-app-name { font-size: 12px; font-weight: bold; text-align: center; }
+.phone-app-description { font-size: 10px; color: #8da18e; text-align: center; }
+
+.phoneBackBtn {
+    display: block;
+    margin: 0 0 18px;
+    padding: 9px 12px;
+    background: #151d16;
+    border: 1px solid #3b6942;
+    border-radius: 6px;
+    color: #9cff9e;
+    cursor: pointer;
+    font-size: 11px;
+}
+
+.phoneBackBtn:hover { background: #203524; }
+
+.code-hack-app { color: #39ff70; }
+
+.hackAppIcon {
+    margin: 8px auto 12px;
+    width: 64px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #020503;
+    border: 1px solid #39ff70;
+    border-radius: 12px;
+    color: #39ff70;
+    font-size: 30px;
+    font-weight: bold;
+    text-shadow: 0 0 12px #39ff70;
+}
+
+.hackStatus {
+    margin: 22px 0;
+    padding: 12px 8px;
+    border: 1px solid #25482d;
+    background: #050a06;
+    color: #85ff99;
+    font-family: monospace;
+    font-size: 11px;
+    text-align: center;
+}
+
+.hackCodeBtn {
+    display: block;
+    width: 100%;
+    padding: 16px 8px;
+    color: #39ff70;
+    background: #020402;
+    border: 2px solid #39ff70;
+    border-radius: 6px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: 0 0 12px #39ff7022;
+}
+
+.hackCodeBtn:hover {
+    background: #102416;
+    box-shadow: 0 0 20px #39ff7055;
+}
+
+#monster5HackOverlay {
+    position: fixed;
+    inset: 0;
+    z-index: 999999;
+    display: none;
+    overflow: hidden;
+    background: #000;
+    color: #39ff70;
+    font-family: monospace;
+    pointer-events: auto;
+}
+
+#monster5HackOverlay.active { display: block; }
+
+.monster5-code-column {
+    position: absolute;
+    top: -120%;
+    color: #39ff70;
+    text-shadow: 0 0 8px #39ff70;
+    font-size: 16px;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    animation: monster5CodeFall linear infinite;
+    user-select: none;
+}
+
+@keyframes monster5CodeFall {
+    from { transform: translateY(0); }
+    to { transform: translateY(250vh); }
+}
+
+/* ==================== СИСТЕМА СОХРАНЕНИЙ (ЛОТУС) ==================== */
+.lotus-saves-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 70000;
+    background: rgba(15, 5, 25, 0.85);
+    backdrop-filter: blur(5px);
+    justify-content: center;
+    align-items: center;
+}
+
+.lotus-saves-box {
+    width: min(420px, 90vw);
+    background: linear-gradient(145deg, #2b0d2b, #15051a);
+    border: 3px solid #ff66b2;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    box-shadow: 0 0 35px rgba(255, 102, 178, 0.4), inset 0 0 15px rgba(255, 102, 178, 0.2);
+    font-family: 'Consolas', monospace;
+    color: #ffd1e8;
+}
+
+.lotus-saves-box h2 {
+    margin-top: 0;
+    color: #ff99cc;
+    font-size: 24px;
+    text-shadow: 0 0 10px #ff3399;
+}
+
+.lotus-saves-subtitle {
+    font-size: 12px;
+    color: #cca6c8;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+}
+
+.lotus-saves-list {
+    max-height: 250px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lotus-save-empty {
+    color: #8c6682;
+    font-size: 13px;
+    padding: 20px;
+}
+
+.lotus-save-card {
+    background: rgba(60, 15, 50, 0.6);
+    border: 1px solid #ff66b2;
+    border-radius: 12px;
+    padding: 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 0 10px rgba(255, 102, 178, 0.2);
+}
+
+.lotus-save-info { text-align: left; }
+.lotus-save-info h4 { margin: 0 0 4px 0; color: #ffccff; font-size: 15px; }
+.lotus-save-info p { margin: 0; font-size: 11px; color: #ffa3d1; }
+
+.lotus-load-btn {
+    background: linear-gradient(135deg, #00cc66, #00994d);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 0 8px rgba(0, 204, 102, 0.5);
+}
+
+.lotus-load-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #00e673, #00b359);
+}
+
+.lotus-close-btn {
+    padding: 10px 25px;
+    background: #990033;
+    color: white;
+    border: 1px solid #ff3366;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.lotus-close-btn:hover {
+    background: #cc0044;
+    box-shadow: 0 0 10px #ff3366;
+}
+
+.lotus-ground-item {
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 60%;
+    transform: translate(-50%, -50%) scale(0.3);
+    width: 150px; /* Увеличили размер картинки */
+    height: 150px;
+    object-fit: contain;
+    z-index: 5; /* Низкий z-index, чтобы любые открытые окна перекрывали его */
+    filter: drop-shadow(0 0 12px #ff66b2);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Плавное и быстрое появление */
+}
+
+/* Класс для плавного появления */
+.lotus-ground-item.show-lotus {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.lotus-cutscene-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    background: black;
+    justify-content: center;
+    align-items: center;
+}
+
+.lotus-cutscene-overlay.active { display: flex; }
+.lotus-cutscene-overlay video { width: 100%; height: 100%; object-fit: contain; }
+
+.lotus-white-flash {
+    position: absolute;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+.lotus-white-flash.flash-active { opacity: 1; }
+
+/* ==================== ВЕРХНИЙ ПРАВЫЙ БЛОК КНОПОК ==================== */
+
+/* Кнопка Ачивки (справа) */
+.achievements-open {
+    position: fixed;
+    top: 22px;
+    right: 25px;
+    width: 145px;
+    height: 65px;
+    z-index: 10001;
+    border: 2px solid #36eaff;
+    border-radius: 10px;
+    color: #bdfaff;
+    background: linear-gradient(135deg, #061c36, #092f50);
+    box-shadow: 0 0 12px #00cfff, inset 0 0 10px #007fa5;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.achievements-open:hover {
+    color: white;
+    background: #087a9b;
+    box-shadow: 0 0 25px #00eaff;
+    transform: scale(1.05);
+}
+
+/* Кнопка Магазин (посередине) */
+.shop-open-btn {
+    position: fixed;
+    top: 22px;
+    right: 185px;
+    width: 145px;
+    height: 65px;
+    z-index: 10001;
+    border: 2px solid #ff3b3b;
+    border-radius: 10px;
+    color: #ffcccc;
+    background: linear-gradient(135deg, #360606, #500909);
+    box-shadow: 0 0 12px #ff0000, inset 0 0 10px #a50000;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.shop-open-btn:hover {
+    color: white;
+    background: #9b0808;
+    box-shadow: 0 0 25px #ff0000;
+    transform: scale(1.05);
+}
+
+/* Кнопка Saves (слева от Магазина) */
+.savesOpenBtn {
+    position: fixed;
+    top: 22px;
+    right: 345px;
+    width: 145px;
+    height: 65px;
+    z-index: 5000;
+    background: linear-gradient(135deg, #36062b, #500941);
+    border: 2px solid #ff66b2;
+    border-radius: 10px;
+    color: #ffd1e8;
+    box-shadow: 0 0 12px #ff3399, inset 0 0 10px #a50066;
+    font-size: 17px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.savesOpenBtn:hover {
+    color: white;
+    background: #9b086b;
+    box-shadow: 0 0 25px #ff3399;
+    transform: scale(1.05);
+}
+
+/* Эффект подсветки кнопок при наведении мышки */
+.pass-btn:hover {
+    background: #6c5ce7 !important;
+    border-color: #a29bfe !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(108, 92, 231, 0.4);
+}
+
+/* Кнопка админки по умолчанию спрятана */
+#adminOpenBtn {
+    display: none;
+    z-index: 100 !important; /* Делаем ниже книги */
+}
+
+/* Когда разблокирована — возвращаем её в поток без сдвигов и перекрашиваний */
+#adminOpenBtn.show {
+    display: inline-block !important;
+}
+
+/* СТРЕЛКИ НА КАРТЕ */
+.mapArrowLeft, .mapArrowRight {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 151;
+    width: 60px;
+    height: 100px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: 2px solid white;
+    border-radius: 8px;
+    font-size: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s;
+}
+
+.mapArrowLeft:hover, .mapArrowRight:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.mapArrowLeft { left: 50px; }
+.mapArrowRight { right: 50px; }
+
+
+#chaseQteContainer {
+    position: fixed;
+    inset: 0;
+    z-index: 100001;
+    pointer-events: none;
+}
+
+.pulse-heart-target {
+    position: absolute;
+    font-size: 35px;
+    cursor: pointer;
+    user-select: none;
+    z-index: 100002;
+    pointer-events: auto !important;
+    transform: translate(-50%, -50%) scale(1);
+    /* Вот эта строчка отвечает за плавное увеличение при кликах */
+    transition: transform 0.15s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.2s ease-out;
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.8));
+}
+
+.pulse-heart-target.spawn {
+    animation: heartPulseSpawn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes heartPulseSpawn {
+    0% { transform: translate(-50%, -50%) scale(0); }
+    100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+.pulse-heart-target.pop {
+    transform: translate(-50%, -50%) scale(2.2) !important;
+    opacity: 0;
+}
+
+/* Контейнер финальных титров */
+#victoryCreditsContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    color: white;
+    z-index: 1000000;
+    display: none;
+    overflow: hidden;
+    font-family: 'Courier New', Courier, monospace; /* Классный игровой/мистический шрифт */
+    text-align: center;
+}
+
+/* Башенка с текстом, которая будет двигаться снизу вверх */
+#victoryCreditsScroll {
+    position: absolute;
+    width: 100%;
+    top: 100%; /* Начинает движение снизу за пределами экрана */
+    animation: scrollCredits 25s linear forwards; /* 25 секунд на всю прокрутку */
+}
+
+/* Стили текста для «башенки» */
+.credit-section {
+    margin-bottom: 50px;
+}
+
+.credit-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #888; /* Серый цвет для названий ролей */
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.credit-name {
+    font-size: 26px;
+    font-weight: bold;
+    color: #fff; /* Белый цвет для имен */
+    margin: 5px 0;
+}
+
+.credit-main-title {
+    font-size: 38px;
+    font-weight: bold;
+    color: #ffeb3b; /* Желтоватый акцент для названия игры */
+    margin-bottom: 20px;
+    letter-spacing: 3px;
+}
+
+.credit-thanks {
+    font-size: 24px;
+    color: #4caf50; /* Зеленоватый оттенок для финальной фразы */
+    margin-top: 40px;
+}
+
+/* Анимация подъема титров снизу вверх */
+@keyframes scrollCredits {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: -310%; /* Прокручивает всё до самого верха и уходит за экран */
+    }
+}
+
+/* ==================== АДАПТИВ ДЛЯ ТЕЛЕФОНОВ (840x390) ==================== */
+@media (max-width: 840px), (max-height: 450px) {
+    body, html {
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Руки по центру и меньше размером */
+    .hands {
+        width: 600px;
+        height: auto;
+        left: 150px;
+        transform: translateX(-50%);
+    }
+
+    /* Стрелки управления */
+    .right {
+        left: auto;
+        right: 20px;
+        top: 45%;
+        width: 90px;
+    }
+
+    .left {
+        left: 20px;
+        top: 45%;
+        width: 90px;
+    }
+
+    .up {
+        left: 50%;
+        transform: translateX(-50%);
+        top: 10px;
+        width: 90px;
+    }
+
+    /* Верхняя панель (ХП, Еда, Энергия, КМ) */
+    .HP, .HUNGER, .ENERGY {
+        transform: scale(0.75);
+        transform-origin: top left;
+        margin-bottom: -5px;
+    }
+
+    .KM-counter-container {
+        font-size: 13px;
+        padding: 2px 8px;
+        margin-top: 2px;
+    }
+
+    .km-icon {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Кнопки в правом верхнем углу (Магазин, Ачивки, Saves, Телефон) */
+    .achievements-open,
+    .shop-open-btn,
+    .savesOpenBtn {
+        width: 90px;
+        height: 40px;
+        font-size: 11px;
+        top: 10px;
+    }
+
+    .savesOpenBtn { right: 215px; }
+    .shop-open-btn { right: 120px; }
+    .achievements-open { right: 20px; }
+
+    .phoneOpenBtn {
+        width: 60px;
+        height: 60px;
+        bottom: 15px;
+        left: 690px;
+    }
+
+    /* Кнопки Карта, Рюкзак, Глаза */
+    .map {
+        width: 70px;
+        left: auto;
+        right: 15px;
+        top: 60px;
+    }
+
+    .backpack {
+        width: 80px;
+        left: 775px;
+        top: 2px;
+    }
+
+    .eyesCLOSE {
+        width: 70px;
+        height: 70px;
+        left: 770px;
+        top: 310px;
+    }
+
+    .eyeIMG {
+        margin-top: 17px;
+    }
+
+    /* Предметы на экране (Вода, Банка, Бинт, Дверь) */
+    .WATER, .ENERGYDRINK, .BANDAGE, .imgTime, .doorIMG {
+        transform: scale(0.7);
+        top: 30% !important;
+        left: 50% !important;
+        transform-origin: center;
+        transform: translate(-50%, -50%) scale(0.7);
+    }
+
+    /* Инвентарь на телефоне */
+    .INVENTORY2 {
+        transform: scale(0.75);
+        transform-origin: center;
+    }
+}
+
+/* Жесткое центрирование и адаптив для кнопки «sleep» на телефонах */
+@media (max-width: 840px), (max-height: 450px) {
+    .sleeping {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: 180px !important;
+        height: 70px !important;
+        font-size: 20px !important;
+        z-index: 10002 !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    .sleeping {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        z-index: 10000 !important;
+    }
+}
+
+/* Когда оверлей активен, кнопка sleep уходит под него и отключается */
+.screen-overlay.active ~ .startButton .sleeping,
+.screen-overlay.active ~ .sleeping {
+    z-index: -1 !important;
+    pointer-events: none !important;
+    opacity: 0 !important;
+}
+
+/* А кнопка wake up всегда строго поверх затемнения */
+.wakeupButton.show {
+    z-index: 999999 !important;
+    pointer-events: auto !important;
+}
+
+/* Полностью убираем кнопку sleep под затемнение, когда оверлей активен */
+.screen-overlay.active ~ .startButton .sleeping,
+.screen-overlay.active ~ .sleeping {
+    z-index: -999 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    visibility: hidden !important;
+}
+
+/* Кнопка sleep под обычным слоем */
+.sleeping {
+    z-index: 10 !important;
+}
+
+/* Затемнение чуть выше */
+.screen-overlay {
+    z-index: 20 !important;
+}
+
+/* Кнопка проснуться (wake up) поверх всего */
+.wakeupButton, #white-flash-btn {
+    z-index: 30 !important;
+}
+
+/* Ограничиваем контейнер с руками по ширине экрана */
+.hands-container, .hand, img[src*="hand"] { /* замени селектор на свой класс рук */
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+@media (max-width: 840px) {
+    /* Привязываем правую руку к правому краю с отступом, а не абсолютным пикселям */
+    .right-hand {
+        right: 10px !important;
+        left: auto !important;
+    }
+}
+
+@media (max-width: 840px) {
+    /* Прижимаем руки к центру и не даем им улетать за экран */
+    .hands-container, .hand {
+        max-width: 100% !important;
+        right: 0 !important;
+        overflow: hidden !important;
+    }
+
+    /* Собираем правый блок (глаз, рюкзак, книгу) в нормальную кучу вверху справа */
+    .top-right-menu, .items-container { /* подставь свои классы-обертки */
+        display: flex !important;
+        gap: 15px !important;
+        position: absolute !important;
+        top: 15px !important;
+        right: 15px !important;
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+
+    /* 2. Карта */
+    .map-btn, .map {
+        position: absolute !important;
+        left: 700px !important;  /* поменяй под себя */
+        top: 2px !important;   /* поменяй под себя */
+        z-index: 100 !important;
+    }
+
+    /* 3. Портальная пушка */
+    .portal-gun, .gun-btn {
+        position: absolute !important;
+        left: 140px !important; /* поменяй под себя */
+        top: 20px !important;   /* поменяй под себя */
+        z-index: 100 !important;
+    }
+
+    /* 4. Телефон */
+    .phone, .phone-btn {
+        position: absolute !important;
+        right: 20px !important; /* поменяй под себя */
+        bottom: 20px !important;/* поменяй под себя */
+        z-index: 100 !important;
+    }
+
+    /* 5. Кнопка с глазом */
+    .eye-button, .eye {
+        position: absolute !important;
+        right: 90px !important; /* поменяй под себя */
+        top: 20px !important;   /* поменяй под себя */
+        z-index: 100 !important;
+    }
+
+}
+@media (max-width: 840px), (max-height: 450px) {
+    /* Точное название класса портальной пушки из твоего HTML (заглавными буквами) */
+    .PORTALGUN {
+        position: absolute !important;
+        left: 620px !important;  /* Настрой под себя по горизонтали на мобилке */
+        top: 2px !important;     /* Настрой под себя по вертикали */
+        width: 70px !important;  /* Уменьшаем под мобильный экран */
+        height: 65px !important;
+        z-index: 100 !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* Кнопки закрытия для карты, пушки и инвентаря */
+    .closeMap, .closeGun, .delete, .DELETE {
+        position: fixed !important;
+        right: 20px !important;
+        left: auto !important;
+        top: 0px !important;
+        font-size: 28px !important;
+        z-index: 99999 !important;
+    }
+}
+
+/* Основные стили модального окна рюкзака / инвентаря */
+.inventory-modal, 
+.backpack-modal, 
+#inventory-screen {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 90vw;
+    max-height: 90vh;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+
+/* Кнопка закрытия («крестик») внутри окна */
+.inventory-close, 
+.backpack-close, 
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    z-index: 1010;
+}
+
+/* Адаптивность для мобилок и маленьких экранов */
+@media screen and (max-width: 840px), screen and (max-height: 450px) {
+    .inventory-modal, 
+    .backpack-modal, 
+    #inventory-screen {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100vw !important;
+        max-height: 100vh !important;
+        top: 0 !important;
+        left: 0 !important;
+        transform: none !important;
+        border-radius: 0 !important;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    .inventory-close, 
+    .backpack-close, 
+    .close-btn {
+        top: 10px;
+        right: 10px;
+        padding: 10px; /* Чтобы пальцем было удобнее попадать */
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* 1. Затемнение всего экрана ПОД инвентарем */
+    .INVENTORY2 {
+        display: none !important;
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        background-color: transparent !important; /* Убираем фон с самого контейнера */
+        z-index: 999999 !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+
+    /* Создаем сплошное затемнение на весь экран прямо под картинкой */
+    .INVENTORY2::before {
+        content: '' !important;
+        position: fixed !important;
+        inset: 0 !important;
+        width: 100vw !important;
+        height: 100vh !important;
+        z-index: 1 !important;
+        pointer-events: auto !important;
+    }
+
+    .INVENTORY2[style*="flex"],
+    .INVENTORY2[style*="block"] {
+        display: flex !important;
+    }
+
+    /* 2. Картинка инвентаря на весь свой блок (растягиваем по размеру экрана) */
+    .INVENTORY2 .inventory {
+        content: url('img/hotbarInvetoryMobile.png') !important;
+        position: relative !important;
+        width: 100vw !important;     /* На всю ширину экрана */
+        height: 100vh !important;    /* На всю высоту экрана */
+        max-width: none !important;
+        max-height: none !important;
+        object-fit: contain !important; /* Сохраняет пропорции, но занимает весь блок */
+        z-index: 2 !important;       /* Поверх затемнения */
+    }
+
+    /* 3. Сетка ячеек строго поверх картинки */
+    .INVENTORY2 .inventory-slots {
+        position: absolute !important;
+        display: grid !important;
+        grid-template-columns: repeat(6, 1fr) !important;
+        grid-template-rows: repeat(4, 1fr) !important;
+        width: 90% !important;
+        height: 90% !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        gap: 4% 3% !important;
+        z-index: 3 !important;
+        pointer-events: auto !important;
+    }
+
+    /* 4. Слоты */
+    .INVENTORY2 .slot {
+        position: relative !important;
+        width: 100% !important;
+        height: 100% !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-sizing: border-box !important;
+        z-index: 4 !important;
+    }
+
+    /* 5. Крестик закрытия */
+    .INVENTORY2 .DELETE,
+    .INVENTORY2 .delete {
+        width: 45px !important;
+        height: 45px !important;
+    }
+}
+
+/* Затемнение всего экрана (body) под инвентарем */
+body.inventory-open::before {
+    content: '' !important;
+    position: fixed !important;
+    inset: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background-color: rgba(0, 0, 0, 0.85) !important; /* Настрой степень темноты здесь */
+    z-index: 999998 !important;
+    pointer-events: auto !important;
+}
+
+/* Сам инвентарь поднимаем выше этого слоя, чтобы он оставался ярким */
+body.inventory-open .INVENTORY2 {
+    z-index: 999999 !important;
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* 1. Общий размер каждой клетки (ширина и высота) */
+    .INVENTORY2 .slot {
+        position: absolute !important;
+        width: 125px !important;   /* <--- Изменяй ширину клетки под себя */
+        height: 90px !important;  /* <--- Изменяй высоту клетки под себя */
+        
+        box-sizing: border-box !important;
+        z-index: 4 !important;
+        pointer-events: auto !important;
+    }
+
+    /* 2. Точная расстановка каждой из 24 клеток (меняй left и top под свою картинку) */
+    .INVENTORY2 .slot:nth-child(1)  { left: 5px; top: 0px; }
+    .INVENTORY2 .slot:nth-child(2)  { left: 133px; top: 0px; }
+    .INVENTORY2 .slot:nth-child(3)  { left: 260px; top: 0px; }
+    .INVENTORY2 .slot:nth-child(4)  { left: 384px; top: 0px; }
+    .INVENTORY2 .slot:nth-child(5)  { left: 513px; top: 0px; }
+    .INVENTORY2 .slot:nth-child(6)  { left: 637px; top: 0px; }
+
+    .INVENTORY2 .slot:nth-child(7)  { left: 5px; top: 90px; }
+    .INVENTORY2 .slot:nth-child(8)  { left: 133px; top: 90px; }
+    .INVENTORY2 .slot:nth-child(9)  { left: 260px; top: 90px; }
+    .INVENTORY2 .slot:nth-child(10) { left: 384px; top: 90px; }
+    .INVENTORY2 .slot:nth-child(11) { left: 513px; top: 90px; }
+    .INVENTORY2 .slot:nth-child(12) { left: 637px; top: 90px; }
+
+    .INVENTORY2 .slot:nth-child(13) { left: 5px; top: 170px; }
+    .INVENTORY2 .slot:nth-child(14) { left: 133px; top: 170px; }
+    .INVENTORY2 .slot:nth-child(15) { left: 260px; top: 170px; }
+    .INVENTORY2 .slot:nth-child(16) { left: 384px; top: 170px; }
+    .INVENTORY2 .slot:nth-child(17) { left: 513px; top: 170px; }
+    .INVENTORY2 .slot:nth-child(18) { left: 637px; top: 170px; }
+
+    .INVENTORY2 .slot:nth-child(19) { left: 5px; top: 262px; }
+    .INVENTORY2 .slot:nth-child(20) { left: 133px; top: 262px; }
+    .INVENTORY2 .slot:nth-child(21) { left: 260px; top: 262px; }
+    .INVENTORY2 .slot:nth-child(22) { left: 384px; top: 262px; }
+    .INVENTORY2 .slot:nth-child(23) { left: 513px; top: 262px; }
+    .INVENTORY2 .slot:nth-child(24) { left: 637px; top: 262px; }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* Уменьшаем картинку предмета внутри слота и центрируем её */
+    .INVENTORY2 .slot img {
+        width: 70% !important;   /* <--- Меняй процент (например, 60% или 80%), чтобы сделать значок меньше или больше */
+        height: 70% !important;  /* <--- Высота под стать ширине */
+        object-fit: contain !important;
+        position: absolute !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* 1. Жёстко уменьшаем ВСЕ предметы на экране, включая воду */
+    .WATER, .ENERGYDRINK, .BANDAGE, .imgTime{
+        width: 85px !important;      
+        height: auto !important;     
+        position: fixed !important;  
+        left: 50% !important;        
+        top: 50% !important;         
+        margin-left: -42px !important; 
+        margin-top: -42px !important;  
+        z-index: 10 !important;
+    }
+
+    .doorIMG{
+        height: auto !important;     
+        position: fixed !important;  
+        left: 470px !important;        
+        top: 270px !important;         
+        margin-left: -42px !important; 
+        margin-top: -42px !important;  
+        z-index: 10 !important;
+    }
+
+    /* 2. Специально для воды — принудительно ограничиваем её высоту, чтобы она не растягивалась */
+    .WATER {
+        height: 85px !important;     /* Жёсткая высота под размер иконки */
+        object-fit: contain !important;
+    }
+
+    /* 3. Опускаем часы респавна (.imgTime) чуть ниже по вертикали */
+    .imgTime {
+        margin-top: 30px !important;  /* При необходимости можешь увеличить или уменьшить это число */
+    }
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    /* 1. Настройка выпадающего списка уровней (<select>) для мобилки */
+    .portalGunHotBar .portalLevelInput {
+        display: block !important;
+        position: absolute !important;
+        
+        /* КООРДИНАТЫ И РАЗМЕРЫ ИНПУТА (меняй под себя) */
+        left: 384px !important;     /* Левее/правее (можно ставить в % или px, например 720px) */
+        top: 213px !important;      /* Выше/ниже */
+        width: 90px !important;  /* Ширина */
+        height: 30px !important;  /* Высота */
+        
+        font-size: 15px !important;
+        transform: none !important;
+        z-index: 5 !important;
+    }
+
+    /* 2. Настройка кнопки запуска портала для мобилки */
+    .portalGunHotBar .portalLaunchButton {
+        display: block !important;
+        position: absolute !important;
+        
+        /* КООРДИНАТЫ И РАЗМЕРЫ КНОПКИ (меняй под себя) */
+        left: 406px !important;     /* Левее/правее */
+        top: 256px !important;      /* Выше/ниже (чуть ниже инпута) */
+        width: 50px !important;  /* Ширина */
+        height: 30px !important;  /* Высота */
+        
+        transform: none !important;
+        opacity: 0 !important;             /* Делаем видимой для настройки */
+        border-radius: 8px !important;
+        z-index: 5 !important;
+        cursor: pointer !important;
+    }
+}
+
+/* Стили для выбора уровня со стрелками (ПК) */
+.portalLevelSelector {
+    position: absolute;
+    left: 720px;
+    top: 420px;
+    width: 120px;
+    height: 45px;
+    box-sizing: border-box;
+    background: #E30000;
+    border: 1px solid #E30000;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #E30000;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6px;
+}
+
+#portalLevelText {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+    user-select: none;
+}
+
+.portalArrowBtn {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+}
+
+.portalArrowBtn:hover {
+    color: #ffeb3b;
+}
+
+/* Мобильный адаптив: твои точные координаты (384px, 213px) и размер (90x30px) */
+@media (max-width: 840px), (max-height: 450px) {
+    .portalLevelSelector {
+        position: absolute !important;
+        left: 384px !important;
+        top: 213px !important;
+        width: 90px !important;
+        height: 30px !important;
+        box-sizing: border-box !important;
+        background: #E30000 !important;
+        border-radius: 6px !important;
+        box-shadow: 0 0 10px #E30000 !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        padding: 0 4px !important;
+        z-index: 5 !important;
+        transform: none !important;
+    }
+
+    #portalLevelText {
+        font-size: 12px !important;
+        color: white !important;
+        font-weight: bold !important;
+        text-align: center !important;
+        flex: 1 !important;
+    }
+
+    .portalArrowBtn {
+        font-size: 16px !important;
+        color: white !important;
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer !important;
+        padding: 0 2px !important;
+    }
+}
+
+.portal {
+    position: fixed;               /* Фиксируем по центру экрана */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 170px;                   /* Сделали компактным, по размеру иконок предметов */
+    max-width: 25vw;               /* Чтобы на мобилках тоже смотрелся аккуратно */
+    height: auto;                  /* Сохраняем пропорции картинки */
+    z-index: 50;                   /* Ставим ниже интерфейса пушки и инвентаря */
+    display: none;                 /* По умолчанию скрыт */
+    cursor: pointer;               /* Курсор-палец при наведении */
+}
+
+.phoneOpenBtn, .eyesCLOSE {
+    z-index: 100 !important; /* Ниже книги */
+}
+
+/* 1. Общий контейнер модального окна выбора */
+.bruh {
+    display: none;
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important; /* Гарантированно центрирует ровно посередине экрана */
+    z-index: 9999999 !important;                  /* Высший слой: гарантированно выше инвентаря и затемнения */
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);             /* Легкое затемнение фона под самим окошком */
+    justify-content: center;
+    align-items: center;
+}
+
+/* 2. Само окошко уведомления */
+.bruh .UseThis {
+    position: relative !important;
+    top: 100px !important;
+    left: 263px !important;
+    transform: none !important;
+    
+    /* 🛠️ ЗДЕСЬ НАСТРАИВАЙ РАЗМЕР ОКОШКА ДЛЯ ПК И МОБИЛОК */
+    width: 320px !important;    /* Ширина окошка */
+    height: 160px !important;   /* Высота окошка */
+    
+    background-color: #555555;
+    border: 2px solid black;
+    border-radius: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+}
+/* ==========================================================
+   ФИНАЛЬНЫЙ ПОРЯДОК: МОНСТР 2 НИЖЕ КНОПКИ ГЛАЗА
+   ========================================================== */
+
+/* 1.НИЖНИЙ СЛОЙ: Шторки-веки и сам Скример 2 (они под кнопкой) */
+.eyelids-overlay {
+    z-index: 1000 !important;
+    pointer-events: none !important;
+}
+
+#monster2Image {
+    z-index: 1100 !important;
+}
+
+/* 2. СРЕДНИЙ СЛОЙ: Кнопка с глазом (Строго ВЫШЕ скримера 2 и шторок) */
+.eyesCLOSE {
+    position: absolute !important;
+    z-index: 2000 !important;
+    pointer-events: auto !important;
+}
+
+/* 3. ВЫСОКИЙ СЛОЙ: Интерфейсы (телефон, админка, карта, пушка) и зеленый переход */
+.MAP2, 
+.portalGunHotBar, 
+#phoneInterface, 
+.admin-screen, 
+#phoneDarkOverlay,
+.jumpscare-overlay.flash-green, 
+.arrow-green-transition {
+    z-index: 5000 !important;
+    pointer-events: auto !important;
+}
+
+/* Кликабельность внутри интерфейсов */
+#phoneInterface *, .admin-screen * {
+    pointer-events: auto !important;
+}
+
+/* 4. САМЫЙ-САМЫЙ ВЕРХ: Дверь, портал, анимации перехода (.lol) и скримеры 1/3 */
+.lol,
+.screen-overlay,
+#monsterImage, 
+#monster3Image, 
+.door-animation, 
+.portal-animation {
+    z-index: 99999 !important;
+}
+
+/* =Жесткое разделение: Скример 2 глубоко под кнопкой = */
+#monster2Image {
+    z-index: 500 !important;
+}
+
+/* Шторки-веки тоже под кнопкой */
+.eyelids-overlay {
+    z-index: 600 !important;
+    pointer-events: none !important;
+}
+
+/* Кнопка с глазом ГАРАНТИРОВАННО выше скримера 2 и шторок */
+.eyesCLOSE {
+    position: absolute !important;
+    z-index: 3000 !important;
+    pointer-events: auto !important;
+}
+
+/* Динамический супер-слой для кнопки, когда активен скример 2 */
+.eyesCLOSE.super-high {
+    z-index: 10000000 !important;
+    position: absolute !important;
+    pointer-events: auto !important;
+}
+
+/* Шторки-веки чуть ниже кнопки глаза, когда активен монстр 2 */
+.eyelids-overlay.super-high {
+    z-index: 9999999 !important;
+}
+
+/* Сбрасываем кнопку глаза и шторки на самый низ, когда идет переход между уровнями */
+.eyesCLOSE.transition-hidden,
+.eyelids-overlay.transition-hidden {
+    z-index: 1 !important;
+}
+
+@media (max-width: 840px), (max-height: 450px) {
+    .admin-panel {
+        width: 90vw !important;
+        max-width: 320px !important;
+        padding: 10px !important;
+    }
+
+    .admin-grid {
+        gap: 6px !important;
+    }
+
+    .admin-btn {
+        padding: 8px !important;
+        font-size: 11px !important;
+    }
+}
+
+#deathScreenContainer {
+    z-index: 99999999999999999 !important; /* Выше шторки и век */
+    position: fixed; /* На всякий случай, чтобы точно поверх висел */
+}
